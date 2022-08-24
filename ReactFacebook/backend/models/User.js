@@ -21,6 +21,49 @@ const userschema = mongoose.Schema(
             trim: true,
             text: true,
             unique: true,
-        }
+        },
+        email: {
+            type: String,
+            required: [true, "email is required"],
+            trim: true,
+        },
+        password: {
+            type: String,
+            required: [true, "password is required"],
+        },
+        picture: {
+            type: String,
+            trim: true,
+            default: "",
+        },
+        cover: {
+            type: String,
+            trim: true,
+        },
+        gender: {
+            type: String,
+            required: [true, "gender is required"],
+            trim: true,
+        },
+        bYear: {
+            type: Number,
+            required: true,
+            trim: true,
+        },
+        bMonth: {
+            type: Number,
+            required: true,
+            trim: true,
+        },
+        bDay: {
+            type: Number,
+            required: true,
+            trim: true,
+        },
+        verified: {
+            type: Boolean,
+            default: false,
+        },
+        
     }
 );
