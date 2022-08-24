@@ -64,6 +64,79 @@ const userschema = mongoose.Schema(
             type: Boolean,
             default: false,
         },
-        
+        friends: {
+            type: Array,
+            default: [],
+        },
+        following: {
+            type: Array,
+            default: [],
+        },
+        followers: {
+            type: Array,
+            default: [],
+        },
+        requests: {
+            type: Array,
+            default: [],
+        },
+        search: [
+            {
+                user: {
+                    type: ObjectId,
+                    ref: "User"
+                }
+            }
+        ],
+        details: {
+            bio: {
+                type: String,
+            },
+            otherName: {
+                type: String,
+            },
+            job: {
+                type: String,
+            },
+            workplace: {
+                type: String,
+            },
+            highSchool: {
+                type: String,
+            },
+            college: {
+                type: String,
+            },
+            currentCity: {
+                type: String,
+            },
+            hometown: {
+                type: String,
+            },
+            relationship: {
+                type: String,
+                enum: ["Single", "In a relationship", "Married", "Divorced"],
+            },
+            instagram: {
+                type: String,
+            },
+        },
+        savedPosts: [
+            {
+                post: {
+                    type: ObjectId,
+                    ref: "Post",
+                },
+                savedAt: {
+                    type: Date,
+                    default: new Date(),
+                },
+            }
+        ]
+    },
+    {
+        timestamps: true
     }
 );
+
+module.exports = mongoose.model("User", userSchema);
