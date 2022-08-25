@@ -30,11 +30,38 @@ exports.register = async(req, res) => {
                 message: "invalid email address",
             });
         }
+
+        // Check user email address to avoid duplicates
+        const check = await User.findOne({ email });
+        if(check){
+            return res.status(400).json({
+                message: "This email address already exists,try with a different email address"
+            });
+        } 
     }catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
 
-exports.login = async(req, res) => {
+exports.activateAccount = async(req, res) => {
+    try{
 
+    }catch(error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
+exports.login = async(req, res) => {
+    try{
+        const { email, password } = req.body;
+        const user = await User.findOne({ email });
+        if(!user){
+            return res.status(400).json({
+                message: 'The email address entered is not connected to an account'
+            });
+        }
+
+    }catch(error) {
+        res.status(500).json({ message: error.message });
+    }
 };
