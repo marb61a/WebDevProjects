@@ -17,14 +17,24 @@ exports.register = async(req, res) => {
             last_name,
             email,
             password,
-            username
+            username,
+            bYear,
+            bMonth,
+            bDay,
+            gender,
         } = req.body;
 
         // Check email address
         if(!validateEmail(email)){
-
+            return res.status(400).json({
+                message: "invalid email address",
+            });
         }
     }catch (error) {
         res.status(500).json({ message: error.message });
     }
+};
+
+exports.login = async(req, res) => {
+
 };
