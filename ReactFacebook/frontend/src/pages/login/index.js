@@ -1,6 +1,8 @@
 import { Formik, Form } from 'formik';
 import { Link } from 'react-router-dom';
 
+import "./style.css";
+
 export default function Login(){
     return(
         <div className='login'>
@@ -28,7 +30,7 @@ export default function Login(){
                             <button className='blue_btn open_signup'>Create Account</button>
                         </div>
                         <Link to="/">
-                            <b>Create a Page</b>
+                            <b>Create a Page </b>
                             for a celebrity, brand or business
                         </Link>
                     </div>
