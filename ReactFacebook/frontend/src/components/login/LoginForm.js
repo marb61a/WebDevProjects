@@ -56,7 +56,48 @@ export default function({ setVisible }){
 
     return(
         <div className="login_wrap">
-
+            <div className="login_1">
+                <img src="../../icons/facebook.svg" alt="" />
+                <span>
+                    Facebook helps you connect and share with the people in your life.
+                </span>
+            </div>
+            <div className="login_2">
+                <div className="login_2_wrap">
+                    <Formik
+                        enableReinitialize
+                        initialValues={{
+                            email,
+                            password
+                        }}
+                        validationSchema={loginValidation}
+                        onSubmit={() => {
+                            loginSubmit();
+                        }}
+                    >
+                        {(formik) => (
+                            <Form>
+                            <LoginInput
+                                type="text"
+                                name="email"
+                                placeholder="Email address or phone number"
+                                onChange={handleLoginChange}
+                            />
+                            <LoginInput
+                                type="password"
+                                name="password"
+                                placeholder="Password"
+                                onChange={handleLoginChange}
+                                bottom
+                            />
+                            <button type="submit" className="blue_btn">
+                                Log In
+                            </button>
+                            </Form>
+                        )}
+                    </Formik>
+                </div>
+            </div>
         </div>
     )
 }
