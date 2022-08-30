@@ -96,7 +96,22 @@ export default function({ setVisible }){
                             </Form>
                         )}
                     </Formik>
+                    <Link to="/forgot" className="forgot_password">
+                            Forgotten Password?
+                    </Link>
+                    <DotLoader color="#1876f2" loading={loading} size={30}/>
+                    {error && <div className="error_text">{error}</div>}
+                    <div className="sign_splitter"></div>
+                    <button
+                        className="blue_btn open_signup"
+                        onClick={() => setVisible(true)}
+                    >
+                        Create Account
+                    </button>
                 </div>
+                <Link to="/" className="sign_extra">
+                    <b>Create a Page</b> for a celebrity, brand or business.
+                </Link>
             </div>
         </div>
     )
