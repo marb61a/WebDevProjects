@@ -55,8 +55,38 @@ export default function RegisterForm({ setVisible }){
             .min(2, "Fisrt name must be between 2 and 16 characters.")
             .max(16, "Fisrt name must be between 2 and 16 characters.")
             .matches(/^[aA-zZ]+$/, "Numbers and special characters are not allowed."),
-            
+        last_name: Yup.string()
+            .required("What's your Last name ?")
+            .min(2, "Last name must be between 2 and 16 characters.")
+            .max(16, "Last name must be between 2 and 16 characters.")
+            .matches(/^[aA-zZ]+$/, "Numbers and special characters are not allowed."),
+        email: Yup.string()
+            .required(
+                "You'll need this when you log in and if you ever need to reset your password."
+            )
+            .email("Enter a valid email address."),
+        password: Yup.string()
+            .required(
+              "Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &)."
+            )
+            .min(6, "Password must be atleast 6 characters.")
+            .max(36, "Password can't be more than 36 characters")
     });
+
+    const [dateError, setDateError] = useState("");
+    const [genderError, setGenderError] = useState("");
+
+    const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
+    const [loading, setLoading] = useState(false);
+
+    const registerSubmit = async() => {
+        try{
+
+        } catch(error) {
+
+        }
+    }
 
     return(
         <div className="blur">
@@ -85,7 +115,13 @@ export default function RegisterForm({ setVisible }){
                         let atleast14 = new Date(1970 + 14, 0, 1);
                     }}
                 >
+                    {(formik) => (
+                        <Form className="register_form">
+                            <div className="reg_line">
 
+                            </div>
+                        </Form>
+                    )}
                 </Formik>
             </div>
         </div>
