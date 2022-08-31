@@ -37,10 +37,28 @@ export default function RegisterInput({ placeholder, bottom, ...props }){
                 {...props}
             />
             {meta.touched && meta.error && (
-                <div>
-                    
+                <div
+                    className={view3 ? "input_error input_error_desktop" : "input_error"}
+                    style={{
+                        transform: "translateY(2px)",
+                        left: `${test1 ? "-107%" : test2 ? "107%" : ""}`
+                    }}
+                >
+                    {meta.touched && meta.error && <ErrorMessage name={field.name} />}
+                    {meta.touched && meta.error && (
+                        <div
+                            className={
+                                view3 && field.name !== "last_name"
+                                ? "error_arrow_left"
+                                : view3 && field.name === "last_name"
+                                ? "error_arrow_right"
+                                : !view3 && "error_arrow_bottom"
+                            }           
+                        ></div>
+                    )}
                 </div>
             )}
+            {meta.touched && meta.error && <i className="error_icon"></i>}
         </div>
     )
 }

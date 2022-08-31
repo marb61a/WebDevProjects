@@ -37,4 +37,17 @@ export default function RegisterForm({ setVisible }){
         bDay,
         gender,
     } = user;
+    const yearTemp = new Date().getFullYear();
+    const handleRegisterChange = (e) => {
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value });
+    };
+    const years = Array.from(new Array(108), (val, index) => yearTemp - index);
+    const months = Array.from(new Array(12), (val, index) => 1 + index);
+    const getDays = () => {
+        return new Date(bYear, bMonth, 0).getDate();
+    };
+    const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
+
+    
 }
