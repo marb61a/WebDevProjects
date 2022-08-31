@@ -49,5 +49,45 @@ export default function RegisterForm({ setVisible }){
     };
     const days = Array.from(new Array(getDays()), (val, index) => 1 + index);
 
-    
+    const registerValidation = Yup.object({
+        first_name: Yup.string()
+            .required("What's your First name ?")
+            .min(2, "Fisrt name must be between 2 and 16 characters.")
+            .max(16, "Fisrt name must be between 2 and 16 characters.")
+            .matches(/^[aA-zZ]+$/, "Numbers and special characters are not allowed."),
+            
+    });
+
+    return(
+        <div className="blur">
+            <div className="register">
+                <div className="register_header">
+                    <i className="exit_icon" onClick={() => setVisible(false)}></i>
+                    <span>Sign Up</span>
+                    <span>it's quick and easy</span>
+                </div>
+                <Formik
+                    enableReinitialize
+                    initialValues={{
+                        first_name,
+                        last_name,
+                        email,
+                        password,
+                        bYear,
+                        bMonth,
+                        bDay,
+                        gender
+                    }}
+                    validationSchema={registerValidation}
+                    onSubmit={() => {
+                        let current_date = new Date();
+                        let picked_date = new Date(bYear, bMonth - 1, bDay);
+                        let atleast14 = new Date(1970 + 14, 0, 1);
+                    }}
+                >
+
+                </Formik>
+            </div>
+        </div>
+    )
 }
