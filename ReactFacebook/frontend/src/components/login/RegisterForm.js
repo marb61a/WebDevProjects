@@ -82,9 +82,29 @@ export default function RegisterForm({ setVisible }){
 
     const registerSubmit = async() => {
         try{
+            const { data } = await axios.post(`${process.env.REACT_APP_BACKEND_URL}/register`, {
+                first_name,
+                last_name,
+                email,
+                password,
+                bYear,
+                bMonth,
+                bDay,
+                gender
+            });
 
+            setError("");
+            setSuccess(data.message);
+            const { message, ...rest } = data;
+            setTimeout(() => {
+                dispatch({ type: "LOGIN", payload: rest });
+                Cookies.set("user", JSON.stringify(rest));
+                navigate("/");
+            }, 2000);
         } catch(error) {
-
+            setLoading(false);
+            setSuccess("");
+            setError(error.response.data.message);
         }
     }
 
@@ -113,6 +133,19 @@ export default function RegisterForm({ setVisible }){
                         let current_date = new Date();
                         let picked_date = new Date(bYear, bMonth - 1, bDay);
                         let atleast14 = new Date(1970 + 14, 0, 1);
+                        let noMoreThan70 = new Date(1970 + 70, 0, 1);
+                        if(current_date - picked_date < atleast14){
+                            setDateError("it looks like you have entered the wrong info.Please make sure that you use your real date of birth.");
+                        } else if(current_date - picked_date > noMoreThan70){
+                            setDateError("it looks like you have entered the wrong info.Please make sure that you use your real date of birth.")
+                        } else if (gender === ""){
+                            setDateError("");
+                            setGenderError("Please choose a gender. You can change who can see this later.");
+                        } else {
+                            setDateError("");
+                            setGenderError("");
+                            registerSubmit();
+                        }
                     }}
                 >
                     {(formik) => (
