@@ -26,6 +26,34 @@ export default function GenderSelect({ handleRegisterChange, genderError}){
                     onChange={handleRegisterChange}
                 />
             <label/>
+            <label htmlFor="female">
+                Female
+                <input 
+                    type="radio"
+                    name="gender"
+                    id="female"
+                    value="female"
+                    onChange={handleRegisterChange}
+                />
+            </label>
+            <label htmlFor="custom">
+                <input 
+                    type="radio"
+                    name="gender"
+                    id="custom"
+                    value="custom"
+                    onChange={handleRegisterChange}
+                />
+            </label>
+            {genderError && (
+                <div
+                    className={!view3 ? "input_error" : "input_error input_error_select_large"}
+                >
+                    <div
+                        className={!view3 ? "error_arrow_bottom" : "error_arrow_left"}
+                    ></div>
+                </div>
+            )}
         </div>
     )
 }
