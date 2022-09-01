@@ -151,7 +151,37 @@ export default function RegisterForm({ setVisible }){
                     {(formik) => (
                         <Form className="register_form">
                             <div className="reg_line">
-
+                                <RegisterInput 
+                                    type="text"
+                                    placeholder="First Name"
+                                    name="first_name"
+                                    onChange={handleRegisterChange}
+                                />
+                                <RegisterInput
+                                    type="text"
+                                    placeholder="Surname"
+                                    name="last_name"
+                                    onChange={handleRegisterChange}
+                                />
+                            </div>
+                            <div className="reg_line">
+                                <RegisterInput
+                                    type="text"
+                                    placeholder="Mobile number or email address"
+                                    name="email"
+                                    onChange={handleRegisterChange}
+                                />
+                            </div>
+                            <div className="reg_line">
+                                <RegisterInput
+                                    type="password"
+                                    placeholder="New password"
+                                    name="password"
+                                    onChange={handleRegisterChange}
+                                />
+                            </div>
+                            <div>
+                                
                             </div>
                         </Form>
                     )}
