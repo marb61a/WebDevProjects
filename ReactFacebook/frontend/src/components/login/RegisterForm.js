@@ -180,9 +180,42 @@ export default function RegisterForm({ setVisible }){
                                     onChange={handleRegisterChange}
                                 />
                             </div>
-                            <div>
-                                
+                            <div className="reg_col">
+                                <div className="reg_line_header">
+                                    Date Of Birth <i className="info_icon"></i>
+                                </div>
+                                <DateOfBirthSelect 
+                                    bDay={bDay}
+                                    bMonth={bMonth}
+                                    bYear={bYear}
+                                    days={days}
+                                    months={months}
+                                    years={years}
+                                    handleRegisterChange={handleRegisterChange}
+                                    dateError={dateError}
+                                />
                             </div>
+                            <div className="reg_col">
+                                <div className="reg_line_header">
+                                    Gender <i className="info_icon"></i>
+                                </div>
+                                <GenderSelect 
+                                    handleRegisterChange={handleRegisterChange}
+                                    genderError={genderError}
+                                />
+                            </div>
+                            <div className="reg_infos">
+                                By clicking Sign Up, you agree to our{" "}
+                                <span>Terms, Data Policy &nbsp;</span>
+                                and <span>Cookie Policy.</span> You may receive SMS
+                                notifications from us and can opt out at any time.
+                            </div>
+                            <div className="reg_btn_wrapper">
+                                <button className="blue_btn open_signup">Sign Up</button>
+                            </div>
+                            <DotLoader color="#1876f2" loading={loading} size={30} />
+                            {error && <div className="error_text">{error}</div>}
+                            {success && <div className="success_text">{success}</div>}
                         </Form>
                     )}
                 </Formik>
