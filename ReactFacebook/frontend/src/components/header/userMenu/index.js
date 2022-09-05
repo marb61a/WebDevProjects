@@ -40,9 +40,26 @@ export default function UserMenu({ user }) {
                             <i className="right_icon"></i>
                         </div>
                     </div>
-                    
+                    <div className="mmenu_item hover3" onClick={() => {setVisible(3)}}>
+                        <div className="small_circle">
+                            <i className="dark_filled_icon"></i>
+                        </div>
+                        <span>Display & Accessibility</span>
+                        <div className="rArrow">
+                            <i className="right_icon"></i>
+                        </div>
+                    </div>
+                    <div className="mmenu_item hover3">
+                        <div className="small_circle">
+                            <i className="logout_filled_icon"></i>
+                        </div>
+                        <span>Logout</span>
+                    </div>
                 </div>
             )}
+            {visible === 1 && <SettingsPrivacy setVisible={setVisible} />}
+            {visible === 2 && <HelpSupport setVisible={setVisible} />}
+            {visible === 3 && <DisplayAccessibility setVisible={setVisible} />}
         </div>
     );
 }

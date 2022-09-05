@@ -27,10 +27,23 @@ export default function Header() {
     const [showAllMenu, setShowAllMenu] = useState(false);
     const [showUserMenu, setShowUserMenu] = useState(false);
 
+    const allmenu = useRef(null);
+    const usermenu = useRef(null);
+    useClickOutside(allmenu, () => {
+        setShowAllMenu(false);
+    });
+    useClickOutside(usermenu, () => {
+        setShowUserMenu(false);
+    });
+
     return(
         <header>
-            <div>
-
+            <div className="header_left">
+                <Link to="/" className="header_logo">
+                    <div className="circle">
+                        <Logo />
+                    </div>
+                </Link>
             </div>
         </header>
     )
