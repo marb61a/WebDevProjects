@@ -74,6 +74,35 @@ export default function Header() {
                     <Gaming color={color} />
                 </Link>
             </div>
+            <div className="header_right">
+                <Link to="/profile" className="profile_link hover1">
+                    <img src={user?.picture} alt=""/>
+                    <span>{user?.first_name}</span>
+                </Link>
+                <div className={`circle_icon hover1 ${showAllMenu && "active_header"}`} ref={allmenu}>
+                    <div onClick={() => {setShowAllMenu((prev) => !prev)}}>
+                        <div style={{ transform: "translateY(2px)" }}>
+                            <Menu />
+                        </div>
+                    </div>
+                    {showAllMenu && <AllMenu />}
+                </div>
+                <div className="circle_icon hover1">
+                    <Messenger />
+                </div>
+                <div className="circle_icon hover1">
+                    <Notifications />
+                    <div className="right_notification">5</div>
+                </div>
+                <div className={`circle_icon hover1 ${showUserMenu && "active_header"}`} ref={usermenu}>
+                    <div onClick={() => {setShowUserMenu((prev) => !prev)}}>
+                        <div style={{ transform: "translateY(2px)" }}>
+                            <ArrowDown />
+                        </div>
+                    </div>
+                    {showUserMenu && <UserMenu user={user} />}
+                </div>
+            </div>
         </header>
-    )
+    );
 }
