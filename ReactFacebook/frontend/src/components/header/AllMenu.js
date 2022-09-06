@@ -38,7 +38,7 @@ export default function AllMenu(){
                     </div>
                     <div className="all_menu_group">
                         <div className="all_menu_group_header">Shopping</div>
-                        {menu.slice(9,11).map((item, i) => (
+                        {menu.slice(9, 11).map((item, i) => (
                             <AllMenuItem 
                                 name={item.name}
                                 description={item.description}
@@ -91,6 +91,17 @@ export default function AllMenu(){
                             />
                         ))}
                     </div>
+                </div>
+                <div className="all_right">
+                    <div className="all_right_header">Create</div>
+                    {create.map((item, i) => (
+                        <div className="all_right_item hover1" key={i}>
+                            <div className="all_right_circle">
+                                <i className={item.icon}></i>
+                            </div>
+                            {item.name}
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
