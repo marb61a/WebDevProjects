@@ -234,7 +234,7 @@
     border: 1px solid var(--bg-third);
 }
 
-  .footer_square i {
+.footer_square i {
     transform: scale(0.8);
     -webkit-filter: invert(40%);
 }
