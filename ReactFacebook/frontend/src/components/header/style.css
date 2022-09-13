@@ -522,3 +522,65 @@ header{
     height: 20px;
 }
 /*-------User menu----*/
+
+/*---responsive----------*/
+@media(max-width: 1295px){
+    .middle-icon{
+        width: 90px;
+    }
+}
+
+@media(max-width: 1130px){
+    .middle-icon{
+        width: 70px;
+    }
+}
+
+@media(max-width: 1040){
+    .search1{
+        width: 40px;
+        height: 40px;
+        padding: 0;
+        justify-content: center;
+    }
+
+    .search1 input{
+        display: none;
+    }
+
+    .header_middle{
+        transform: translateX(-15%);
+    }
+}
+
+@media(max-width: 945px){
+    .header_middle{
+        transform: translateX(-22%);
+    }
+}
+
+@media(max-width: 850px){
+    .header_middle{
+        transform: translateX(-30%);
+    }
+
+    .middle-icon:nth-child(4){
+        display: none;
+    }
+}
+
+@media (max-width: 770px) {
+    .header_middle {
+        transform: translateX(-37%);
+    }
+    .middle_icon:nth-child(4) {
+        display: none;
+    }
+}
+  
+@media (max-width: 720px) {
+    .middle_icon:nth-child(3) {
+        display: none;
+    }
+}
+/*---responsive----------*/
