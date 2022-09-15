@@ -11,7 +11,9 @@ export const uploadImages = async(formData, path, token) => {
                     "content-type": "multipart/form-data"
                 }
             }
-        )
+        );
+
+        return data;
     } catch(error){
         return error.response.data.message;
     }
