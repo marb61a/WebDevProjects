@@ -40,8 +40,36 @@ export default function ImgaePreview({
     };
 
     return(
-        <div>
+        <div className="overflow_a scrollbar">
+            <EmojiPickerBackgrounds text={text} user={user} setText={setText} type2 />
+            <div className="add_pics_wrap">
+                <input 
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp,image/gif"
+                    multiple
+                    hidden
+                    ref={imageInputRef}
+                    onChange={handleImages}
+                />
+                {images && images.length ? (
+                    <div className="add_pics_inside1 p0">
+                        <div className="preview_actions">
+                            <button className="hover1">
+                                <i className="edit_icon"></i>
+                                Edit
+                            </button>
+                            <button className="hover1" onClick={() => { imageInputRef.current.click() }}>
+                                <i className="addPhoto_icon"></i>
+                                Add Photos/Videos
+                            </button>
+                        </div>
+                    </div>
+                ) : (
+                    <div>
 
+                    </div>
+                )}
+            </div>
         </div>
     );
 }
