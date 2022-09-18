@@ -63,10 +63,39 @@ export default function ImgaePreview({
                                 Add Photos/Videos
                             </button>
                         </div>
+                        <div className="small_white_circle" onClick={() => { setImages([])}}>
+                            <i className="exit_icon"></i>
+                        </div>
+                        <div
+                            className={
+                                images.length === 1
+                                ? "preview1"
+                                : images.length === 2
+                                ? "preview2"
+                                : images.length === 3
+                                ? "preview3"
+                                : images.length === 4
+                                ? "preview4 "
+                                : images.length === 5
+                                ? "preview5"
+                                : images.length % 2 === 0
+                                ? "preview6"
+                                : "preview6 singular_grid"
+                            }   
+                        >
+                            {images.map((img, i) => (
+                                <img src={img} key={i} alt=""/>
+                            ))}
+                        </div>
                     </div>
                 ) : (
-                    <div>
-
+                    <div className="add_pics_inside1">
+                        <div className="small_white_circle" onClick={() => { showSetPrev(false)}}>
+                            <i className="exit_icon"></i>
+                        </div>
+                        <div>
+                        
+                        </div>   
                     </div>
                 )}
             </div>
