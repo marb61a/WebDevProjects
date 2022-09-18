@@ -41,9 +41,37 @@ export default function EmojiPickerBackgrounds({
         "../../../public/images/postBackgrounds/9.jpg"
     ];
 
-    return(
-        <div className="">
+    const backgroundHandler = (i) => {
+        bgRef.current.style.backgroundImage = `url(${postBackgrounds[i]})`;
+        setBackground(postBackgrounds[i]);
+        bgRef.current.classList.add("bgHandler");
+    };
+    const removeBackground = (i) => {
+        bgRef.current.style.backgroundImage = "";
+        setBackground("");
+        bgRef.current.classList.remove("bgHandler");
+    };
 
+    return(
+        <div className={type2 ? "images_input" : ""}>
+            <div className={!type2 ? "flex_center" : ""} ref={bgRef}>
+                <textarea 
+                    ref={textRef}
+                    maxLength="250"
+                    value={text}
+                    placeholder={`What's on your mind, ${user.first_name}`}
+                    className={`post_input ${type2 ? "input2" : ""}`}
+                    onChange={(e) => setText(e.target.value)}
+                    style={{
+                        paddingTop: `${
+                        background
+                            ? Math.abs(textRef.current.value.length * 0.1 - 32)
+                            : "0"
+                        }%`,
+                    }}
+                >
+                </textarea>
+            </div>
         </div>
     );
 }
