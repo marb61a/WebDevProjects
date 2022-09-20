@@ -44,6 +44,40 @@ export default function CreatePostPopup({ user, setVisible }){
             }
         } else if(images && images.length){
             setLoading(true);
+            const postImages = images.map((img) => {
+                return dataURItoBlob(img);
+            });
+            const path = `${user.username}/ post Images`;
+            let formData = new FormData();
+            formData.append("path", path);
+            postImages.forEach((image) => {
+                formData.append("file", image);
+            });
+            const response = await uploadImages(formData, path, user.token);
+            const res = await createPost(null, null, text, response, user.id, user.token);
+            setLoading(false);
+
+            if(res == "ok"){
+                setText("");
+                setImages("");
+                setVisible(false);
+            } else {
+                setError(res);
+            }
+        } else if(text){
+            setLoading(true);
+            const response = await createPost(null, null, text, response, user.id, user.token);
+            setLoading(false);
+
+            if(response == "ok"){
+                setText("");
+                setImages("");
+                setVisible(false);
+            } else {
+                setError(response);
+            }
+        } else {
+            console.log("nothing");
         }
     }
 
