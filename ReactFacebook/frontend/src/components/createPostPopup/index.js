@@ -1,6 +1,17 @@
 import { useEffect, useRef, useState } from "react";
 import Picker from "emoji-picker-react";
 import { useDispatch } from "react-redux";
+import PulseLoader from "react-spinners/PulseLoader";
+
+import PostError from "./PostError";
+import dataURItoBlob from "../../helpers/dataURItoBlob";
+import { uploadImages } from "../../functions/uploadImages";
+import EmojiPickerBackgrounds from "./EmojiPickerBackgrounds";
+import AddToYourPost from "./AddToYourPost";
+import ImagePreview from "./ImagePreview";
+import useClickOutside from "../../helpers/clickOutside";
+import { createPost } from "../../functions/post";
+
 
 export default function CreatePostPopup({ user, setVisible }){
     const dispatch = useDispatch();
@@ -15,6 +26,26 @@ export default function CreatePostPopup({ user, setVisible }){
     useClickOutside(popup, () => {
         setVisible(false);
     });
+
+    const postSubmit = async() => {
+        if(background){
+            setLoading(true);
+            const response = await createPost(
+                null, background, text, null, user.id, user.token
+            );
+
+            setLoading(false);
+            if(response === "ok"){
+                setBackground("");
+                setText("");
+                setVisible(false);
+            } else {
+                setError(response);
+            }
+        } else if(images && images.length){
+            setLoading(true);
+        }
+    }
 
     return(
         <div className="blur">
