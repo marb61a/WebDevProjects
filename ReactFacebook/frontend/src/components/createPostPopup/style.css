@@ -176,3 +176,64 @@
 .moveleft {
     transform: translateX(-10px);
 }
+
+.moviepicker2{
+    right: 1rem;
+    top: 9.7rem;
+    z-index: 9999;
+}
+
+.images_input{
+    display: flex;
+}
+
+.add_pics_wrap{
+    margin: 10px 15px;
+    padding: 10px;
+    border: 1px solid var(--bg-third);
+    border-radius: 10px;
+}
+
+.add_pics_inside1{
+    position: relative;
+    background: var(--bg-secondary);
+    border-radius: 10px;
+    padding: 10px;
+    height: 250px;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+}
+
+.add_col{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.small_white_circle{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid var(--bg-third);
+    background: var(--bg-primary);
+    display: grid;
+    place-items: center;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    cursor: pointer;
+    z-index: 99;    
+}
+
+.add_circle{
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--bg-third);
+    background: var(--bg-third);
+    display: grid;
+    place-items: center;   
+}
+
