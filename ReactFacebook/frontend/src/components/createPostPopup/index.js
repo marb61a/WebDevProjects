@@ -116,8 +116,21 @@ export default function CreatePostPopup({ user, setVisible }){
                         />
                     </>
                 ) : (
-
+                    <ImagePreview 
+                        text={text}
+                        user={user}
+                        setText={setText}
+                        showPrev={showPrev}
+                        images={images}
+                        setImages={setImages}
+                        setShowPrev={setShowPrev}
+                        setError={setError}                        
+                    />
                 )}
+                <AddToYourPost setShowPrev={setShowPrev}/>
+                <button className="post_submit" onClick={() => {postSubmit();}} disabled={loading}>
+                    {loading ? <PulseLoader color="#fff" size={5} /> : "Post"}
+                </button>
             </div>
         </div>
     );
