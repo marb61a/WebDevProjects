@@ -20,11 +20,39 @@ export default function ChangePassword({
     const navigate = useNavigate();
     const validatepassword = Yup.object({
         password: Yup.string()
+            .required("Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &).")
+            .min(6, "Passwords must be at least 6 characters")
+            .max(36, "Password can't be more than 36 characters"),
+        conf_password: Yup.string()
+            .required("Confirm your password")
+            .oneOf([Yup.ref("password")], "Passwords must match.")
     });
 
-    return(
-        <div className="">
+    const { email } = userInfos;
+    const changePassword = async() => {
+        try{
+            setLoading(true);
+            await axios.post(`${process.env.REACT_APP_BACKEND_URL}/changePassword`, {
+                email, 
+                password
+            });
+            setError("");
+            navigate("/");
+        } catch(error){
+            setLoading(false);
+            setError(error.response.data.message);
+        }
+    }
 
+    return(
+        <div className="reset_form" style={{ height: "310px" }}>
+            <div className="reset_form_header">Change Password</div>
+            <div className="reset_form_text">Pick a Strong Password</div>
+            <Formik
+            
+            >
+
+            </Formik>
         </div>
     );
 }
