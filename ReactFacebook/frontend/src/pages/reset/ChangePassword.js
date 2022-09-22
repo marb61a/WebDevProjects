@@ -18,7 +18,7 @@ export default function ChangePassword({
     setError,
 }){
     const navigate = useNavigate();
-    const validatepassword = Yup.object({
+    const validatePassword = Yup.object({
         password: Yup.string()
             .required("Enter a combination of at least six numbers,letters and punctuation marks(such as ! and &).")
             .min(6, "Passwords must be at least 6 characters")
@@ -49,9 +49,38 @@ export default function ChangePassword({
             <div className="reset_form_header">Change Password</div>
             <div className="reset_form_text">Pick a Strong Password</div>
             <Formik
-            
+                enableReinitialize
+                initialValues={{
+                    password,
+                    conf_password
+                }}
+                validationSchema={validatePassword}
+                onSubmit={() => {changePassword()}}
             >
-
+                <Form>
+                    <LoginInput 
+                        type="password"
+                        name="password"
+                        onChange={(e) => setPassword(e.target.value)}
+                        placeholder="New password"
+                    />
+                    <LoginInput
+                        type="password"
+                        name="conf_password"
+                        onChange={(e) => setConf_password(e.target.value)}
+                        placeholder="Confirm new password"
+                        bottom
+                    />
+                    {error && <div className="error_text">{error}</div>}
+                    <div className="reset_form_btns">
+                        <Link to="/login" className="gray_btn">
+                            Cancel
+                        </Link>
+                        <button type="submit" className="blue_btn">
+                            Continue
+                        </button>
+                    </div>
+                </Form>
             </Formik>
         </div>
     );
