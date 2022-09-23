@@ -44,8 +44,30 @@ export default function CodeVerification({
                 Please enter code that been sent to your email.
             </div>
             <Formik
+                enableReinitialize
+                initialValues={{code}}
+                validationSchema={validateCode}
+                onSubmit={() => {verifyCode();}}
             >
-
+                {(formik) => (
+                    <Form>
+                        <LoginInput 
+                            type="text"
+                            name="code"
+                            onChange={(e) => setCode(e.target.value)}
+                            placeholder="Code"
+                        />
+                        {error && <div className="error_text">{error}</div>}
+                        <div className="reset_form_btns">
+                            <Link to="/login" className="gray_btn">
+                                Cancel
+                            </Link>
+                            <button type="submit" className="blue_btn">
+                                Continue
+                            </button>
+                        </div>
+                    </Form>
+                )}
             </Formik>
         </div>
     );
