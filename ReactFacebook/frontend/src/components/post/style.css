@@ -47,3 +47,53 @@
     font-weight: 600;
     line-height: 19px;
 }
+
+.post_profile_name {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 19px;
+}
+ 
+.updated_p {
+    color: var(--color-secondary);
+    font-weight: normal;
+}
+ 
+.post_profile_privacy_date {
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    color: var(--color-secondary);
+}
+ 
+.post_bg {
+    height: 500px;
+    padding: 15px;
+    display: grid;
+    place-items: center;
+    font-weight: 600;
+    font-size: 22px;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+ 
+.post_text {
+    padding: 0 15px 10px 15px;
+}
+
+/*Grid Images section*/
+.grid_1 img {
+    width: 100%;
+    height: 610px;
+    object-fit: cover;
+}
+ 
+.grid_1 {
+    display: flex;
+    height: 610px;
+    justify-content: center;
+}
