@@ -18,15 +18,30 @@ export default function Detail({
         <div>
             <div className="add_details_flex" onClick={() => setShow(true)}>
                 {value ? (
-                    <div>
-                        
+                    <div className="info_profile ">
+                        <img src={`../../../icons/${img}.png`} alt="" />
+                            {value}
+                        <i className="edit_icon"></i>
                     </div>
                 ) : (
                     <>
-                        <i></i>
-                    </>    
-                )}
+                        <i className="rounded_plus_icon"></i>
+                        <span className="underline">Add {text}</span>
+                    </>
+                )}                
             </div>
+            {show && (
+                <Bio 
+                    placeholder={placeholder}
+                    name={name}
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                    detail
+                    setShow={setShow}
+                    rel={rel}
+                />
+            )}
         </div>
     );
 }
