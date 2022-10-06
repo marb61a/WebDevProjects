@@ -80,6 +80,51 @@ export default function EditDetails({
                             updateDetails={updateDetails}
                             infos={infos}
                         />
+                    <div className="details_header">Current City</div>
+                        <Detail
+                            value={details?.currentCity}
+                            img="home"
+                            placeholder="Add a current city"
+                            name="currentCity"
+                            text="a current city"
+                            handleChange={handleChange}
+                            updateDetails={updateDetails}
+                            infos={infos}
+                        />
+                    <div className="details_header">Hometown</div>
+                        <Detail
+                            value={details?.hometown}
+                            img="home"
+                            placeholder="Add hometown"
+                            name="hometown"
+                            text="hometown"
+                            handleChange={handleChange}
+                            updateDetails={updateDetails}
+                            infos={infos}
+                        />
+                    <div className="details_header">Relationship</div>
+                        <Detail
+                            value={details?.relationship}
+                            img="relationship"
+                            placeholder="Add instagram"
+                            name="relationship"
+                            text="relationship"
+                            handleChange={handleChange}
+                            updateDetails={updateDetails}
+                            infos={infos}
+                            rel
+                        />
+                    <div className="details_header">Instagram</div>
+                        <Detail
+                            value={details?.instagram}
+                            img="home"
+                            placeholder="Add instagram"
+                            name="instagram"
+                            text="instagram"
+                            handleChange={handleChange}
+                            updateDetails={updateDetails}
+                            infos={infos}
+                        />
                 </div>
             </div>
         </div>
