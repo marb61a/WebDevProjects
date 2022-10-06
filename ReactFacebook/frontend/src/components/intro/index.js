@@ -66,6 +66,36 @@ export default function Intro({ detailss, visitor, setOthername }) {
                     Add Bio
                 </button>
             )}
+            {showBio && (
+                <Bio 
+                    infos={infos}
+                    max={max}
+                    handleChange={handleChange}
+                    setShowBio={setShowBio}
+                    updateDetails={updateDetails}
+                    placeholder="Add Bio"
+                    name="bio"
+                />
+            )}
+            {details?.job && details?.workplace ? (
+                <div className="info_profile">
+                    <img src="../../../icons/job.png" alt="" />
+                    works as {details?.job} at <b>{details?.workplace}</b>
+                </div>
+            ) : details?.job && !details?.workplace ? (
+                <div className="info_profile">
+                  <img src="../../../icons/job.png" alt="" />
+                  works as {details?.job}
+                </div>
+            ) : (
+                details?.workplace &&
+                !details?.job && (
+                  <div className="info_profile">
+                    <img src="../../../icons/job.png" alt="" />
+                    works at {details?.workplace}
+                  </div>
+                )
+            )}
         </div>
     );
 }
