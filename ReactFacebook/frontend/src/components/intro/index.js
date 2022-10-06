@@ -126,6 +126,34 @@ export default function Intro({ detailss, visitor, setOthername }) {
                     From {details?.hometown}
                 </div>
             )}
+            {details?.hometown && (
+                <div className="info_profile">
+                    <img src="../../../icons/instagram.png" alt="" />
+                    <a href={`https://www.instagram.com/${details?.instagram}`} target="_blank">
+                        {details?.instagram}
+                    </a>
+                </div>
+            )}
+            {!visitor && (
+                <button className="gray_btn hover1 w100" onClick={() => setVisible(true)}>
+                    Edit Details
+                </button>
+            )}
+            {visible && !visitor && (
+                <EditDetails
+                    details={details}
+                    handleChange={handleChange}
+                    updateDetails={updateDetails}
+                    infos={infos}
+                    setVisible={setVisible}
+                />
+            )}
+            {!visitor && (
+                <button className="gray_btn hover1 w100">Add Hobbies</button>
+            )}
+            {!visitor && (
+                <button className="gray_btn hover1 w100">Add Featured</button>
+            )}
         </div>
     );
 }
