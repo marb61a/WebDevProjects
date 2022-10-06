@@ -96,6 +96,36 @@ export default function Intro({ detailss, visitor, setOthername }) {
                   </div>
                 )
             )}
+            {details?.relationship && (
+                <div className="info_profile">
+                    <img src="../../../icons/relationship.png" alt="" />
+                    {details?.relationship}
+                </div>
+            )}
+            {details?.college && (
+                <div className="info_profile">
+                    <img src="../../../icons/studies.png" alt="" />
+                    studied at {details?.college}
+                </div>
+            )}
+            {details?.highSchool && (
+                <div className="info_profile">
+                    <img src="../../../icons/studies.png" alt="" />
+                    studied at {details?.highSchool}
+                </div>
+            )}
+            {details?.currentCity && (
+                <div className="info_profile">
+                <img src="../../../icons/home.png" alt="" />
+                    Lives in {details?.currentCity}
+                </div>
+            )}
+            {details?.hometown && (
+                <div className="info_profile">
+                <img src="../../../icons/home.png" alt="" />
+                    From {details?.hometown}
+                </div>
+            )}
         </div>
     );
 }
