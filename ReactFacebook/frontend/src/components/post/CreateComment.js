@@ -52,7 +52,39 @@ export default function CreateComment({ user }){
                             <Picker onEmojiClick={handleEmoji}/>
                         </div>
                     )}
+                    <input 
+                        type="file"
+                        hidden
+                        ref={imgInput}
+                        accept="image/jpeg,image/png,image/gif,image/webp"
+                        onChange={handleImage}
+                    />
+                    {error && (
+                        <div className="postError comment_error">
+                            <div className="postError_error">{error}</div>
+                            <button className="blue_btn" onClick={() => setError("")}>
+                                Try again
+                            </button>
+                        </div>
+                    )}
+                    <input 
+                        type="text"
+                        ref={textRef}
+                        value={text}
+                        placeholder="Write a comment..."
+                        onChange={(e) => setText(e.target.value)}
+                    />
+                    <div className="comment_circle_icon hover2" onClick={() => imgInput.current.click()}>
+                        <i className="camera_icon"></i>
+                    </div>
+                    <div className="comment_circle_icon hover2">
+                        <i className="gif_icon"></i>
+                    </div>
+                    <div className="comment_circle_icon hover2">
+                        <i className="sticker_icon"></i>
+                    </div>
                 </div>
+                
             </div>
         </div>
     );
