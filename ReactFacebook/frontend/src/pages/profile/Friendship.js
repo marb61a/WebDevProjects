@@ -25,6 +25,49 @@ export default function Friendship({ friendShip, profileid}){
     useClickOutside(menu1, () => setRespondMenu(false));
     const { user } = useSelector((state) => ({ ...state }));
 
+    const addFriendHandler = async() => {
+        setFriendship({
+            ...friendship, requestSent: true, following: true
+        });
+        await addFriend(profileid, user.token);
+    };
+    const cancelRequestHandler = async() => {
+        setFriendship({
+            ...friendship, requestSent: false, following: false
+        });
+        await cancelRequest(profileid, user.token);
+    };
+    const followHandler = async() => {
+        setFriendship({
+            ...friendship, following: true
+        });
+        await follow(profileid, user.token);
+    };
+    const unfollowHandler = async() => {
+        setFriendship({
+            ...friendship, following: false
+        });
+        await unfollow(profileid, user.token);
+    };
+    const acceptRequestHandler = async() => {
+        setFriendship({
+            ...friendship, friends: true, following: true, requestSent: false, requestReceived: false
+        });
+        await acceptRequest(profileid, user.token);
+    };
+    const unfriendHandler = async() => {
+        setFriendship({
+            ...friendship, friends: false, following: false, requestSent: false, requestReceived: false
+        });
+        await unfriend(profileid, user.token);
+    };
+    const deleteRequestHandler = async() => {
+        setFriendship({
+            ...friendship, friends: false, following: false, requestSent: false, requestReceived: false
+        });
+        await deleteRequest(profileid, user.token);
+    }
+
     return(
         <div className="friendship">
             {friendship?.friends?(
