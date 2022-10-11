@@ -8,8 +8,11 @@ import { createPost } from "../../functions/post";
 import { uploadImages } from "../../functions/uploadImages";
 import useClickOutside from "../../helpers/clickOutside";
 import getCroppedImg from "../../helpers/getCroppedImg";
+import OldCovers from "./OldCovers";
 
 export default function Cover({ cover, visitor, photos }){
+    const [showCoverMneu, setShowCoverMenu] = useState(false);
+    const [coverPicture, setCoverPicture] = useState("");
     const [loading, setLoading] = useState(false);
     const [show, setShow] = useState(false);
     const { user } = useSelector((state) => ({ ...state }));
@@ -20,8 +23,47 @@ export default function Cover({ cover, visitor, photos }){
     
     const [error, setError] = useState("");
     const handleImage = (e) => {
+        let file = e.target.files[0];
 
+        if(file.type !== "image/jpeg" && file.type !== "image/png" && file.type !== "image/webp" && file.type !== "image/gif"){
+            setError(`${file.name} format is not supported`);
+            setShowCoverMenu(false);
+            return; 
+        } else if(file.size > 1024 * 1024 * 5){
+            setError(`${file.name} is too large max 5mb allowed.`);
+            setShowCoverMenu(false);
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = (event) => {
+            setCoverPicture(event.target.result);
+        };
     };
+
+    const [crop, setCrop] = useState({ x: 0, y: 0 });
+    const [zoom, setZoom] = useState(1);
+    const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        setCroppedAreaPixels(croppedAreaPixels);
+    }, []);
+    const getCroppedImage = useCallback(
+        async(show) => {
+            try{
+                const img = await getCroppedImg(coverPicture, croppedAreaPixels);
+                if (show) {
+                    setZoom(1);
+                    setCrop({ x: 0, y: 0 });
+                    setCoverPicture(img);
+                } else {
+                    return img;
+                }
+            } catch(error) {
+                console.log(error);
+            }
+        }
+    )
 
     return(
         <div className="profile_cover" ref={coverRef}> 
