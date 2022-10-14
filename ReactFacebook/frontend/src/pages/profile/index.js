@@ -80,6 +80,21 @@ export default function Profile({ setVisible }){
     const [leftHeight, setLeftHeight] = useState();
     const [scrollHeight, setScrollHeight] = useState();
 
+    useEffect(() => {
+        setHeight(profileTop.current.clientHeight + 300);
+        setLeftHeight(leftSide.current.clientHeight);
+        window.addEventListener("scroll", getScroll, { passive: true});
+        return() => {
+            window.addEventListener("scroll", getScroll, { passive: true});
+        }
+    }, [loading, scrollHeight]);
+    const check = useMediaQuery({
+        query: "(min-width:901px)"
+    });
+    const getScroll = () => {
+        setScrollHeight(window.pageYOffset);
+    };
+
     return(
         <div className="profile">
             <Header />
@@ -115,6 +130,43 @@ export default function Profile({ setVisible }){
                                     visitor={visitor}
                                     setOthername={setOthername}
                                 />
+                                <Photos 
+                                    username={userName}
+                                    visitor={visitor}
+                                    setOthername={setOthername}
+                                />
+                                <Friends friends={profile.friends}/>
+                                <div className="relative_fb_copyright">
+                                    <Link to="/">Privacy </Link>
+                                    <span>. </span>
+                                    <Link to="/">Terms </Link>
+                                    <span>. </span>
+                                    <Link to="/">Advertising </Link>
+                                    <span>. </span>
+                                    <Link to="/">
+                                        Ad Choices <i className="ad_choices_icon"></i>{" "}
+                                    </Link>
+                                    <span>. </span>
+                                    <Link to="/"></Link>Cookies <span>. </span>
+                                    <Link to="/">More </Link>
+                                    <span>. </span> <br />
+                                    Meta © 2022
+                                </div>
+                            </div>
+                            <div className="profile_right">
+                                {!visitor && (
+                                    <CreatePost user={user} profile setVisible={setVisible}/>
+                                )}
+                                <GridPosts />
+                                <div className="posts">
+                                    {profile.posts && profile.posts.length ? (
+                                        profile.posts.map((post) => (
+                                            <Post post={post} user={user} key={post._id} profile />
+                                        ))
+                                    ) : (
+                                        <div className="no_posts">No posts available</div>
+                                    )}
+                                </div>
                             </div>
                         </div>
                     </div>
