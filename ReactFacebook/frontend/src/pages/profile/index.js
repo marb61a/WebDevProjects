@@ -50,11 +50,35 @@ export default function Profile({ setVisible }){
 
             if(data.ok === false){
                 navigate("/profile");
+            } else {
+                try{
+                    const images = await axios.post(
+                        `${process.env.REACT_APP_BACKEND_URL}/listImages`, {path, sort, max}, {headers:{Authorization: `Bearer ${user.token}`}}
+                    );
+
+                    setPhotos(images.data);
+                } catch(error){
+                    console.log(error);
+                }
+
+                dispatchEvent({
+                    type: "PROFILE_SUCCESS",
+                    payload: data
+                });
             }
         } catch(error){
-
+            dispatch({
+                type: "PROFILE_ERROR",
+                payload: error.response.data.message,
+            });
         }
     };
+
+    const profileTop = useRef(null);
+    const leftSide = useRef(null);
+    const [height, setHeight] = useState();
+    const [leftHeight, setLeftHeight] = useState();
+    const [scrollHeight, setScrollHeight] = useState();
 
     return(
         <div className="profile">
