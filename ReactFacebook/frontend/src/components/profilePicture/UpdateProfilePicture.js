@@ -49,7 +49,43 @@ export default function UpdateProfilePicture({
             let img = await getCroppedImage();
             let blob = await fetch(img).then((b) => b.blob());
             const path = `${user.username}/profile_pictures`;
+            
             let formData = new FormData();
+            formData.append("file", blob);
+            formData.append("path", path);
+            const res = await uploadImages(formData, path, user.token);
+
+            const updated_picture = await updateProfilePicture(
+                res[0].url,
+                user.token
+            );
+            if(updated_picture === "ok"){
+                const newPost = await createPost("profilePicture", null, description, res, user.id, user.token);        
+
+                if(newPost === "ok"){
+                    setLoading(false);
+                    setImage("");
+                    pRef.current.style.backgroundImage = `url(${res[0].url})`;
+                    Cookies.set(
+                        "user",
+                        JSON.stringify({
+                          ...user,
+                          picture: res[0].url,
+                        })
+                    );
+                    dispatch({
+                        type: "UPDATEPICTURE",
+                        payload: res[0].url,
+                    });
+                    setShow(false);
+                } else {
+                    setLoading(false);
+                    setError(newPost);
+                }
+            } else {
+                setLoading(false);
+                setError(updated_picture);
+            }
         } catch (error) {
             setLoading(false);
             setError(error.response.data.message);
