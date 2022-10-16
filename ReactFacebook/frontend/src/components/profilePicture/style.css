@@ -43,10 +43,66 @@
     color: var(--color-primary);
 }
 
-  .textarea_blue:focus {
+.textarea_blue:focus {
     outline-color: var(--blue-color);
 }
  
 .textarea_blue:hover {
     border-color: var(--color-secondary);
+}
+
+.update_center{
+    position: relative;
+    height: 400px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crooper{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    height: 300px;
+    width: 100%;
+}
+
+.crooper img {
+    width: 100%;
+    object-fit: contain;
+}
+ 
+.update_img .reactEasyCrop_CropAreaGrid {
+    width: 300px !important;
+    height: 300px !important;
+    color: rgba(255, 255, 255, 0.5);
+}
+ 
+.slider {
+    position: absolute;
+    bottom: -20px;
+    width: 100%;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    justify-content: center;
+}
+  
+.slider input[type="range"] {
+    -webkit-appearance: none;
+    width: 55%;
+    height: 4px;
+    background: #ced0d4;
+}
+  
+.slider input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    outline: none;
+    border-radius: 50%;
+    background: #fff;
+    box-shadow: 0 2px 2px var(--shadow-1), 0 2px 2px 0 var(--shadow-2), inset 0 0 0 1px var(--shadow-inset);
+    border: 1px solid var(--bg-third);
 }
