@@ -102,8 +102,40 @@ export default function UpdateProfilePicture({
             </div>
             <div className="update_image_desc">
                 <textarea
-                
+                    placeholder="Description"
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                    className="textarea_blue details_input"
                 ></textarea>
+            </div>
+            <div className="update_center">
+                <div className="crooper">
+                    <Cropper 
+                        image={image}
+                        crop={crop}
+                        zoom={zoom}
+                        aspect={1 / 1}
+                        cropShape="round"
+                        onCropChange={setCrop}
+                        onCropComplete={onCropComplete}
+                        onZoomChange={setZoom}
+                        showGrid={false}        
+                    />
+                </div>
+                <div className="slider">
+                    <div className="slider_circle hover1" onClick={() => zoomOut()}>
+                        <i className="minus_icon"></i>
+                    </div>
+                    <input 
+                        type="range"
+                        min={1}
+                        max={3}
+                        step={0.2}
+                        ref={slider}
+                        value={zoom}
+                        onChange={(e) => setZoom(e.target.value)}
+                    />
+                </div>
             </div>
         </div>
     );
