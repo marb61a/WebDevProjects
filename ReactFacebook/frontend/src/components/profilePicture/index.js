@@ -48,7 +48,47 @@ export default function ProfilePicture({ username, setShow, pRef, photos }){
                     </div>
                     <span>Update Profile Picture</span>
                 </div>
-                
+                <div className="update_picture_wrap">
+                    <div className="update_picture_buttons">
+                        <button
+                            className="light_blue_btn"
+                            onClick={() => refInput.current.click()}
+                        >
+                            <i className="plus_icon filter_blue"></i>
+                            Upload photo
+                        </button>
+                        <button className="gray_btn">
+                            <i className="frame_icon"></i>
+                            Add frame
+                        </button>
+                    </div>
+                </div>
+                {error && (
+                    <div className="postError comment_error">
+                        <div className="postError_error">{error}</div>
+                        <button className="blue_btn" onClick={() => setError("")}>
+                            Try Again
+                        </button>
+                    </div>
+                )}
+                <div className="old_pictures_wrap scrollbar">
+                    <h4>Your Profile Pictures</h4>
+                    <div className="old_pictures">
+                        {photos.filter(
+                            (img) => img.folder === `${user.username}/profile_pictures`
+                        )
+                        .map((photo) =>(
+                            <img 
+                                src={photo.secure_url}
+                                key={photo.public_id}
+                                alt=""
+                                onClick={() => setImage(photo.secure_url)}
+                            />
+                        ))}
+                    </div>
+                    <h4>other pictures</h4>
+                    
+                </div>
             </div>
         </div>
     );
