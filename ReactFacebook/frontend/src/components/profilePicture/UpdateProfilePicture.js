@@ -26,6 +26,18 @@ export default function UpdateProfilePicture({
     const { user } = useSelector((state) => ({ ...state }));
     const [loading, setLoading] = useState(false);
 
+    const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
+        setCroppedAreaPixels(croppedAreaPixels);
+    }, []);
+    const zoomIn = () => {
+        slider.current.stepUp();
+        setZoom(slider.current.value);
+    };
+    const zoomOut = () => {
+        slider.current.stepDown();
+        setZoom(slider.current.value);
+    };
+
     const getCroppedImage = useCallback(
         async(show) => {
            try{
@@ -135,7 +147,34 @@ export default function UpdateProfilePicture({
                         value={zoom}
                         onChange={(e) => setZoom(e.target.value)}
                     />
+                    <div className="slider_circle hover1" onClick={() => zoomOut()}>
+                        <i className="plus_icon"></i>
+                    </div>
                 </div>
+            </div>
+            <div className="flex_up">
+                <div className="gray_btn" onClick={() => getCroppedImage("show")}>
+                    <i className="crop_icon"></i>Crop Photo
+                </div>
+                <div className="gray_btn">
+                    <i className="temp_icon"></i>Make Temporary
+                </div>
+            </div>
+            <div className="flex_p_t">
+                <i className="public_icon"></i>
+                Your profile picture is public
+            </div>
+            <div className="update_submit_wrap">
+                <div className="blue_link"  onClick={() => setImage("")}>
+                    Cancel
+                </div>
+                <button
+                    className="blue_btn"
+                    disabled={loading}
+                    onClick={() => updateProfilePicture()}
+                >
+                    {loading ? <PulseLoader color="#fff" size={5} /> : "Save"}
+                </button>
             </div>
         </div>
     );
