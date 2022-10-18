@@ -87,9 +87,30 @@ export default function ProfilePicture({ username, setShow, pRef, photos }){
                         ))}
                     </div>
                     <h4>other pictures</h4>
-                    
+                    <div className="old_pictures">
+                        {photos.filter(
+                            (img) => img.folder !== `${user.username}/profile_pictures`
+                        )
+                        .map((photo) => (
+                            <img 
+                                src={photo.secure_url}
+                                key={photo.public_id}
+                                alt=""
+                                onClick={() => setImage(photo.secure_url)}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
+            {image && (
+                <UpdateProfilePicture 
+                    setImage={setImage}
+                    image={image}
+                    setShow={setShow}
+                    setError={setError}
+                    pRef={pRef}
+                />
+            )}
         </div>
     );
 }
