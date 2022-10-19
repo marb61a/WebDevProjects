@@ -222,3 +222,64 @@
     height: 305px;
     object-fit: cover;
 }
+
+.grid_5 {
+    position: relative;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr 1fr;
+    background: #fff;
+    gap: 1px;
+}
+
+.grid_5 img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.grid_5 .img-0 {
+    width: 100%;
+    grid-column: auto / span 3;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    height: 305px;
+    object-fit: cover;
+}
+ 
+.grid_5 .img-1 {
+    width: 100%;
+    grid-column: auto / span 3; 
+    grid-row-start: 1;
+    grid-row-end: 2;
+    height: 305px;
+    object-fit: cover;
+}
+ 
+.grid_5 .img-2 {
+    width: 100%;
+    grid-column: auto / span 2;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    height: 305px;
+    object-fit: cover;
+}
+ 
+.grid_5 .img-3 {
+    width: 100%;
+    grid-column: auto / span 2; 
+    grid-row-start: 2;
+    grid-row-end: 3;
+    height: 305px;
+    object-fit: cover;
+}
+
+.grid_5 .img-4 {
+    width: 100%;
+    grid-column: auto / span 3;
+    grid-row-start: 2;
+    grid-row-end: 3;
+    height: 305px;
+    object-fit: cover;
+}
