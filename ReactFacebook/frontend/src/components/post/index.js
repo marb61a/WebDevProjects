@@ -47,6 +47,7 @@ export default function Post({ post, user, profile }){
                 >
                     <Dots color="#828387" />
                 </div>
+            </div>        
                 {post.background ? (
                     <div
                         className="post_bg"
@@ -71,12 +72,43 @@ export default function Post({ post, user, profile }){
                                     : post.images.length >= 5 && "grid_5"
                                 }
                             >
-
+                                {post.images.slice(0, 5).map((image, i) => (
+                                    <img src={image.url} key={i} alt="" className={`img-${i}`} />
+                                ))}
+                                {post.images.length > 5 && (
+                                    <div className="more-pics-shadow">
+                                        +{post.images.length - 5}
+                                    </div>
+                                )}
                             </div>
                         )}
                     </>
+                ) : post.type === "profilePicture" ? (
+                    <div className="post_profile_wrap">
+                        <div className="post_updated_bg">
+                            <img src={post.user.cover} alt="" />
+                        </div>
+                        <img
+                            src={post.images[0].url}
+                            alt=""
+                            className="post_updated_picture"
+                        />
+                    </div>
+                ) : (
+                    <div className="post_cover_wrap">
+                        <img src={post.images[0].url} alt="" />
+                    </div>
                 )}
-            </div>
+                <div className="post_infos">
+                    <div className="react_count">
+                        <div className="reacts_count_imgs"></div>
+                        <div className="reacts_count_num"></div>
+                    </div>
+                    <div className="to_right">
+                        <div className="comments_count">13 comments</div>
+                        <div className="share_count">1 share</div>
+                    </div>
+                </div>
         </div>
     );
 }
