@@ -33,8 +33,22 @@ export default function ReactsPopup({ visible, setVisible }){
             {visible && (
                 <div
                     className="reacts_popup"
+                    onMouseOver={() => {
+                        setTimeout(() => {
+                            setVisible(true);
+                        }, 500);
+                    }}
+                    onMouseLeave={() => {
+                        setTimeout(() => {
+                            setVisible(false);
+                        }, 500);
+                    }}
                 >
-
+                    {reactsArray.map((react, i) => (
+                        <div className="react" key={i}>
+                            <img src={react.image} alt="" />
+                        </div>
+                    ))}
                 </div>
             )}
         </>

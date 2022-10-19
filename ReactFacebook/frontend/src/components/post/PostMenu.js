@@ -22,6 +22,17 @@ export default function PostMenu({
                 subtitle="Add this to your saved items."
             />
             <div className="line"></div>
+            {test && <MenuItem icon="edit_icon" title="Edit Post" />}
+            {!test && (
+                <MenuItem 
+                    icon="turnOnNotification_icon"
+                    title="Turn on notifications for this post"
+                />
+            )}
+            {imagesLength && <MenuItem icon="download_icon" title="Download" />}
+            {imagesLength && (
+                <MenuItem icon="fullscreen_icon" title="Enter Fullscreen" />
+            )}
             
         </ul>
     )
