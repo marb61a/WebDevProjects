@@ -109,6 +109,45 @@ export default function Post({ post, user, profile }){
                         <div className="share_count">1 share</div>
                     </div>
                 </div>
+                <div className="post_actions">
+                    <ReactsPopup visible={visible} setVisible={setVisible}/>
+                    <div
+                        className="post_action hover1"
+                        onMouseOver={() => {
+                            setTimeout(() => {
+                                setVisible(true);
+                            }, 500);
+                        }}
+                        onMouseLeave={() => {
+                            setTimeout(() => {
+                                setVisible(false);
+                            }, 500);
+                        }}
+                    >
+                        <i className="like_icon"></i>
+                        <span>Like</span>
+                    </div>
+                    <div className="post_action hover1">
+                        <i className="comment_icon"></i>
+                        <span>Comment</span>
+                    </div>
+                    <div className="post_action hover1">
+                        <i className="share_icon"></i>
+                        <span>Share</span>
+                    </div>
+                </div>
+                <div className="comments_wrap">
+                    <div className="comments_order"></div>
+                    <CreateComment user={user} />
+                </div>
+                {showMenu && (
+                    <PostMenu
+                        userId={user.id}
+                        postUserId={post.user._id}
+                        imagesLength={post?.images?.length}
+                        setShowMenu={setShowMenu}
+                    />
+                )}
         </div>
     );
 }
