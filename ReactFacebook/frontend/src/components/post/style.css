@@ -283,3 +283,57 @@
     height: 305px;
     object-fit: cover;
 }
+
+/*End Grid Images section*/
+
+.more-pics-shadow {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 305px;
+    width: 33.33%;
+    background: #94949454;
+    font-size: 32px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+}
+  
+.post_infos {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+}
+ 
+.reacts_count {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+ 
+.reacts_count_imgs {
+    display: flex;
+    align-items: center;
+    gap: 1px;
+}
+
+.reacts_count_imgs img {
+    width: 18px;
+}
+  
+.reacts_count_num {
+    font-size: 14px;
+    color: var(--color-secondary);
+}
+ 
+.to_right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--color-secondary);
+    font-size: 15px;
+}
