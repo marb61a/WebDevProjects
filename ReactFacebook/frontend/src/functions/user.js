@@ -77,3 +77,39 @@ export const unfollow = async(id, token) => {
         return error.response.data.message;
     }
 };
+
+export const acceptRequest = async(id, token) => {
+    try {
+        const { data } = await axios.put(
+            `${process.env.REACT_APP_BACKEND_URL}/acceptRequest/${id}`, {}, {headers: {Authorization: `Bearer ${token}`}}
+        );
+
+        return "ok";
+    } catch (error) {
+        return error.response.data.message;
+    }
+};
+
+export const unfriend = async(id, token) => {
+    try {
+        const { data } = await axios.put(
+            `${process.env.REACT_APP_BACKEND_URL}/unfriend/${id}`, {}, {headers: {Authorization: `Bearer ${token}`}}
+        );
+
+        return "ok";
+    } catch (error) {
+        return error.response.data.message;
+    }
+};
+
+export const deleteRequest = async(id, token) => {
+    try {
+        const { data } = await axios.put(
+            `${process.env.REACT_APP_BACKEND_URL}/deleteRequest/${id}`, {}, {headers: {Authorization: `Bearer ${token}`}}
+        );
+
+        return "ok";
+    } catch (error) {
+        return error.response.data.message;
+    }
+};
