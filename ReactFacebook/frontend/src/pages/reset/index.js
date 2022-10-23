@@ -4,7 +4,13 @@ import Cookies from "js-cookie";
 import { Form, Formik } from "formik";
 import { useState } from "react";
 
+import "./style.css";
 import LoginInput from "../../components/inputs/loginInput";
+import SearchAccount from "./SearchAccount";
+import SendEmail from "./SendEmail";
+import CodeVerification from "./CodeVerification";
+import Footer from "../../components/login/Footer";
+import ChangePassword from "./ChangePassword";
 
 export default function Reset(){
     const { user } = useSelector((state) => ({ ...state }));
@@ -18,11 +24,33 @@ export default function Reset(){
     const [conf_password, setConf_password] = useState("");
     const [error, setError] = useState("");
     const [userInfos, setUserInfos] = useState("");
+
+    const logout = () => {
+        Cookies.set("user", "");
+        dispatch({
+            type: "LOGOUT"
+        });
+        navigate("/login");
+    };
     
     return(
         <div className="reset">
             <div className="reset_header">
-
+                <img src="../../../icons/facebook.svg" alt="" />
+                {user ? (
+                    <div className="right_reset">
+                        <Link to="/profile">
+                            <img src={user.picture} alt="" />
+                        </Link>
+                        <button className="blue_btn" onClick={() => {logout();}}>
+                            Logout
+                        </button>
+                    </div>
+                ) : (
+                    <Link to="/login" className="right_reset">
+                        <button className="blue_btn">Login</button>
+                    </Link>
+                )}
             </div>
         </div>
     );
