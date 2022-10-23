@@ -52,6 +52,42 @@ export default function Reset(){
                     </Link>
                 )}
             </div>
+            <div className="reset_wrap">
+                {visible === 0 && (
+                    <SearchAccount
+                        email={email}
+                        setEmail={setEmail}
+                        error={error}
+                        setError={setError}
+                        setLoading={setLoading}
+                        setUserInfos={setUserInfos}
+                        setVisible={setVisible}
+                  />
+                )}
+                {visible === 1 && userInfos && (
+                    <SendEmail
+                        email={email}
+                        userInfos={userInfos}
+                        error={error}
+                        setError={setError}
+                        setLoading={setLoading}
+                        setUserInfos={setUserInfos}
+                        setVisible={setVisible}
+                    />
+                )}
+                {visible === 2 && (
+                    <CodeVerification
+                        user={user}
+                        code={code}
+                        setCode={setCode}
+                        error={error}
+                        setError={setError}
+                        setLoading={setLoading}
+                        setVisible={setVisible}
+                        userInfos={userInfos}
+                    />
+                )}
+            </div>
         </div>
     );
 }
