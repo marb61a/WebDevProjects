@@ -63,7 +63,36 @@ export default function Cover({ cover, visitor, photos }){
                 console.log(error);
             }
         }
-    )
+    );
+
+    const coverRef = useRef(null);
+    const [width, setWidth] = useState();
+    useEffect(() => {
+        setWidth(coverRef.current.clientWidth);
+    }, [window.innerWidth]);
+    const updateCoverPicture = async() => {
+        try{
+            setLoading(true);
+            let img = await getCroppedImage();
+            let blob = await fetch(img).then((b) => b.blob());
+
+            const path = `${user.username}/cover_pictures`;
+            let formData = new FormData();
+            formData.append("file", blob);
+            formData.append("path", path);
+            const res = await uploadImages(formData, path, user.token);
+            const updated_picture = await updateCover(res[0].url, user.token);
+
+            if(updated_picture === "ok"){
+
+            } else {
+                setLoading(false);
+            }
+        } catch (error) {
+            setLoading(false);
+            setError(error.response.data.message);
+        }
+    }
 
     return(
         <div className="profile_cover" ref={coverRef}> 
