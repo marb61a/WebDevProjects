@@ -87,7 +87,21 @@ export default function Reset(){
                         userInfos={userInfos}
                     />
                 )}
+                {visible === 3 && (
+                    <ChangePassword
+                        password={password}
+                        conf_password={conf_password}
+                        setConf_password={setConf_password}
+                        setPassword={setPassword}
+                        error={error}
+                        setError={setError}
+                        setLoading={setLoading}
+                        setVisible={setVisible}
+                        userInfos={userInfos}
+                    />
+                )}
             </div>
+            <Footer />
         </div>
     );
 }

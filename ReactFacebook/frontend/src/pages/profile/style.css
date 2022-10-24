@@ -280,3 +280,52 @@
     gap: 10px;
 }
 /*------End People You may know Section------*/
+
+.left_header_grid{
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.flex{
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.grid2{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr) !important;
+    font-size: 14px;
+}
+
+.view_type{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    font-weight: 600;
+    color: var(--color-secondary);    
+}
+
+.grid2 .active {
+    color: var(--blue-color);
+}
+
+.othername {
+    color: var(--color-secondary);
+    font-size: 20px;
+}
+ 
+.no_posts {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 20px;
+    color: var(--color-secondary);
+}
+
+/*--Menu Section-------*/
+
+/*--End Menu Section-------*/
