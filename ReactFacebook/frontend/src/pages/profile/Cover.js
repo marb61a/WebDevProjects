@@ -122,6 +122,40 @@ export default function Cover({ cover, visitor, photos }){
                     </div>
                 </div>
             )}
+            <input 
+                type="file"
+                ref={refInput}
+                hidden
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                onChange={handleImage}
+            />
+            {error && (
+                <div className="postError comment_error cover_error">
+                    <div className="postError_error">{error}</div>
+                    <button className="blue_btn" onClick={() => setError("")}>
+                        Try Again
+                    </button>
+                </div>
+            )}
+            {coverPicture && (
+                <div className="cover_crooper">
+                    <Cropper 
+                        image={coverPicture}
+                        crop={crop}
+                        zoom={zoom}
+                        aspect={width / 350}
+                        onCropChange={setCrop}
+                        onCropComplete={onCropComplete}
+                        onZoomChange={setZoom}
+                        showGrid={true}
+                        objectFit="horizontal-cover"    
+                    />
+                </div>
+            )}
+            {cover && !coverPicture && (
+                <img src={cover} className="cover" alt="" ref={cRef} />
+            )}
+            
         </div>
     );
 }
