@@ -383,5 +383,62 @@
     object-fit: cover;
     border-radius: 10px;
 }
+
+.profile_photo_card span {
+    color: var(--color-primary);
+    font-size: 13px;
+    padding-left: 1px;
+}
+
+.profile_friend_count {
+    font-weight: 600;
+}
+ 
+.profile_friend_imgs {
+    display: flex;
+    align-items: center;
+}
+ 
+.profile_friend_imgs img {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px var(--shadow-1);
+}
+ 
+.profile_friend_imgs img:hover {
+    filter: brightness(110%);
+}
 /*--End Profile Card Subsection*/
+.cover_crooper{
+    height: 100%;
+}
+
+.cover_crooper img{
+    object-fit: cover;
+    width: 100%;
+}
+
+.cover_crooper .reactEasyCrop_Container {
+    border-bottom-right-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+
+/*--Save Changes Subsection*/
+.save_changes_cover{
+    z-index: 999999999;
+    position: fixed;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px 15px;
+    background: rgba(0, 0, 0, 0.7);
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--color-primary);
+}
+
+/*--End Save Changes Subsection*/
 /*--End Menu Section-------*/
