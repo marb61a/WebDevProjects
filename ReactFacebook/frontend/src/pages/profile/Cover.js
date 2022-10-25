@@ -84,7 +84,17 @@ export default function Cover({ cover, visitor, photos }){
             const updated_picture = await updateCover(res[0].url, user.token);
 
             if(updated_picture === "ok"){
+                const new_post = await createPost("coverPicture", null, null, res, user.id, user.token);
+                console.log(new_post);
 
+                if(new_post === "ok"){
+                    setLoading(false);
+                    setCoverPicture("");
+                    cRef.current.src = res[0].url;
+                } else {
+                    setLoading(false);
+                    setError(updated_picture);
+                }
             } else {
                 setLoading(false);
             }
@@ -96,7 +106,22 @@ export default function Cover({ cover, visitor, photos }){
 
     return(
         <div className="profile_cover" ref={coverRef}> 
-
+            {coverPicture && (
+                <div className="save_changes_cover">
+                    <div className="save_changes_left">
+                        <i className="public_icon"></i>
+                        Your cover photo is public
+                    </div>
+                    <div className="save_changes_right">
+                        <button className="blue_btn opacity_btn" onClick={() => setCoverPicture("")}>
+                            Cancel
+                        </button>
+                        <button className="blue_btn " onClick={() => updateCoverPicture()}>
+                            {loading ? <PulseLoader color="#fff" size={5} /> : "Save changes"}
+                        </button>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
