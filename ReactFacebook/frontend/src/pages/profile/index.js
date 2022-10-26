@@ -8,7 +8,7 @@ import { profileReducer } from "../../functions/reducers";
 import Header from "../../components/header";
 import "./style.css";
 import Cover from "./Cover";
-import ProfilePictureInfos from "./ProfielPictureInfos";
+import ProfilePictureInfos from "./ProfilePicturesInfos";
 import ProfileMenu from "./ProfileMenu";
 import PplYouMayKnow from "./PplYouMayKnow";
 import CreatePost from "../../components/createPost";
