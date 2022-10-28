@@ -101,8 +101,24 @@ export default function Post({ post, user, profile }){
                 )}
                 <div className="post_infos">
                     <div className="react_count">
-                        <div className="reacts_count_imgs"></div>
-                        <div className="reacts_count_num"></div>
+                        <div className="reacts_count_imgs">
+                            {reacts && reacts
+                                .sort((a, b) => {
+                                    return b.count - a.count
+                                })
+                                .slice(0, 3)
+                                .map((react, i) => 
+                                    react.count > 0 && (
+                                        <img 
+                                            src={`../../../public/reacts/${react.react}.svg`}
+                                            alt=""
+                                            key={i}
+                                        />
+                                    )
+                                )
+                            }
+                        </div>
+                        <div className="reacts_count_num">{total > 0 && total}</div>
                     </div>
                     <div className="to_right">
                         <div className="comments_count">13 comments</div>
@@ -110,7 +126,7 @@ export default function Post({ post, user, profile }){
                     </div>
                 </div>
                 <div className="post_actions">
-                    <ReactsPopup visible={visible} setVisible={setVisible}/>
+                    <ReactsPopup visible={visible} setVisible={setVisible} reactHandler={reactHandler}/>
                     <div
                         className="post_action hover1"
                         onMouseOver={() => {
@@ -123,9 +139,18 @@ export default function Post({ post, user, profile }){
                                 setVisible(false);
                             }, 500);
                         }}
+                        onClick={() => reactHandler(check ? check : "like")}
                     >
-                        <i className="like_icon"></i>
-                        <span>Like</span>
+                        {check ? (
+                            <img 
+                                src={`../../../reacts/${check}.svg`}
+                                alt=""
+                                className="small_react"
+                                style={{ width: "18px" }}
+                            />
+                        ): (
+                            <i className="like_icon"></i>
+                        )}
                     </div>
                     <div className="post_action hover1">
                         <i className="comment_icon"></i>
