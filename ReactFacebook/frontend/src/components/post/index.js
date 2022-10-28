@@ -151,6 +151,29 @@ export default function Post({ post, user, profile }){
                         ): (
                             <i className="like_icon"></i>
                         )}
+                        <span
+                            style={{
+                                color: `
+                                    ${
+                                        check === "like"
+                                        ? "#4267b2"
+                                        : check === "love"
+                                        ? "#f63459"
+                                        : check === "haha"
+                                        ? "#f7b125"
+                                        : check === "sad"
+                                        ? "#f7b125"
+                                        : check === "wow"
+                                        ? "#f7b125"
+                                        : check === "angry"
+                                        ? "#e4605a"
+                                        : ""
+                                    }
+                                `
+                            }}
+                        >
+                            {check ? check : "Like"}
+                        </span>
                     </div>
                     <div className="post_action hover1">
                         <i className="comment_icon"></i>
@@ -163,7 +186,12 @@ export default function Post({ post, user, profile }){
                 </div>
                 <div className="comments_wrap">
                     <div className="comments_order"></div>
-                    <CreateComment user={user} />
+                    <CreateComment 
+                        user={user}
+                        postId={post._id}
+                        setComments={setComments}
+                        setCount={setCount}
+                    />
                 </div>
                 {showMenu && (
                     <PostMenu
