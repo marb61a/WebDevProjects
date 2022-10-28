@@ -44,10 +44,10 @@ export default function Card({ user, type, getData}){
                 </button>
             ) : type === "request" ? (
                 <>
-                    <button className="blue_btn" onClick={() => confirmHandler(userr._id)}>
+                    <button className="blue_btn" onClick={() => confirmHandler(user._id)}>
                         Confirm
                     </button>
-                    <button className="gray_btn" onClick={() => deleteHandler(userr._id)}>
+                    <button className="gray_btn" onClick={() => deleteHandler(user._id)}>
                         Delete
                     </button>
                 </>
