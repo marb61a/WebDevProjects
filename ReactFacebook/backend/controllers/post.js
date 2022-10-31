@@ -18,8 +18,45 @@ exports.getAllPosts = async(req, res) => {
         const following = followingTemp.following;
 
         const promises = following.map((user) => {
-
+            return post.find({ user: user})
+                .populate("user", "first_name last_name picture username cover")
+                .populate("comments.commentBy", "first_name last_name picture username")
+                .sort({ createdAt: -1 })
+                .limit(10);
         });
+
+        const followingPosts = await(await Promise.all(promises)).flat();
+        followingPosts.push(...[...userPosts]);
+        followingPosts.sort((a, b) => {
+            return b.createdAt - a.createdAt;
+        });
+        res.json(followingPosts);
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+exports.comment = async(req, res) => {
+    try{
+        const { comment, image, postId } = req.body;
+        let newComments = await Post.findByIdAndUpdate(
+            postId, {
+                $push: {
+                    comments:{
+                        comment: comments,
+                        image: image,
+                        commentBy: req.user.id,
+                        commentAt: new Date()
+                    }
+                }
+            },
+            {
+                new: true
+            }
+        ).populate("comments.commentBy", "picture first_name last_name username");
+        res.json(newComments.comments);
     } catch(error){
         return res.status(500).json({
             message: error.message
