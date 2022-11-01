@@ -222,3 +222,36 @@ exports.sendResetPasswordCode = async(req, res) => {
         });
     }
 };
+
+exports.validateResetCode = async(req, res) => {
+    try{
+        const { email, code } = req.body;
+        const user = await User.findOne({ email });
+        const DbCode = await User.findOne({ user: user._id });
+        if(DbCode.code !== code){
+            return res.status(400).json({
+                message: "Verification code is incorrect"
+            });
+        }
+
+        return res.status(200).json({
+            message: "Ok"
+        });
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+exports.changePassword = async(req, res) => {
+    const { email, password } = req.body;
+    const cryptedPassword = await bcrypt.hash(password, 12);
+    await User.findOneAndUpdate(
+        { email },
+        {
+            password: cryptedPassword,
+        }
+    );
+    return res.status(200).json({ message: "ok" });
+};
