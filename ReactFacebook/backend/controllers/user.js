@@ -179,3 +179,46 @@ exports.sendVerification = async(req, res) => {
         });
     }
 };
+
+exports.findUser = async(req, res) => {
+    try{
+        const { email } = req.body;
+        const user = await User.findOne({ email }).select("-password");
+        if(!user){
+            return res.status(400).json({
+                message: "Account does not exist"
+            });
+        }
+
+        return res.status(200).json({
+            email: user.email,
+            picture: user.picture
+        });
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+exports.sendResetPasswordCode = async(req, res) => {
+    try{
+        const { email } = req.body;
+        const user = await User.findOne({ email }).select("-password");
+        await code.findOneAndRemove({ user: user._id });
+        const code = generateCode(5);
+        const savedCode = await new Code({
+            code,
+            user: user._id,
+        }).save();
+        sendResetCode(user.email, user.first_name, code);
+
+        return res.status(200).json({
+            message: "Reset code has been sent to your email address"
+        });
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
