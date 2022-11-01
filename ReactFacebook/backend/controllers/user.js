@@ -1,14 +1,19 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const cloudinary = require("cloudinary");
+const mongoose = require("mongoose");
 
 const User = require("../models/User");
+const Post = require("../models/Post");
+const Code = require("../models/Code");
 const { generateToken } = require("../helpers/tokens");
-const { sendVerificationEmail } = require("../helpers/mailer");
+const { sendVerificationEmail, sendResetCode } = require("../helpers/mailer");
 const {
     validateEmail,
     validateLength,
     validateUsername,
 } = require("../helpers/validation");
+const generateCode = require("../helpers/generateCode");
 
 exports.register = async(req, res) => {
     try{
@@ -146,5 +151,31 @@ exports.login = async(req, res) => {
 
     }catch(error) {
         res.status(500).json({ message: error.message });
+    }
+};
+
+exports.sendVerification = async(req, res) => {
+    try{
+        const id = req.user.id;
+        const user = await User.findById(id);
+        if(user.verified === true){
+            return res.status(400).json({
+                message: "This account is already activated.",
+            });
+        }
+
+        const emailVerificationToken = generateToken(
+            { id: user._id.toString() },
+            "30m"
+        );
+        const url = `${process.env.BASE_URL}/activate/${emailVerificationToken}`;
+        sendVerificationEmail(user.email, user.first_name, url);
+        return res.status(200).json({
+            message: "Email verification link has been sent to your email.",
+        });
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
     }
 };
