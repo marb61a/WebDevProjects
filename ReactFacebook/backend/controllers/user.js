@@ -299,3 +299,31 @@ exports.getProfile = async(req, res) => {
         });
     }
 };
+
+exports.updateProfilePicture = async (req, res) => {
+    try {
+        const { url } = req.body;  
+        await User.findByIdAndUpdate(req.user.id, {
+            picture: url
+        });
+        res.json(url);
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+  
+exports.updateCover = async (req, res) => {
+    try {
+        const { url } = req.body;
+        await User.findByIdAndUpdate(req.user.id, {
+            cover: url
+        });
+        res.json(url);
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
