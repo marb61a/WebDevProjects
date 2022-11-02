@@ -327,3 +327,39 @@ exports.updateCover = async (req, res) => {
         });
     }
 };
+
+exports.updateDetails = async(req, res) => {
+    try{
+        const { infos } = req.body;
+        const updated = await User.findByIdAndUpdate(
+            req.user.id,
+            {
+                details: infos
+            },
+            {
+                new: true
+            }
+        );
+        res.json(updated.details);
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+exports.addFriend = async(req, res) => {
+    try{
+        if(req.user.id !== req.params.id){
+
+        } else {
+            return res.status(400).json({
+                message: "You can't send a request to yourself"
+            });
+        }
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
