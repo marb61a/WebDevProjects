@@ -386,12 +386,41 @@ exports.addFriend = async(req, res) => {
 exports.cancelRequest = async (req, res) => {
     try{
         if(req.user.id !== req.params.id){
+            const sender = await User.findById(req.user.id);
+            const receiver = await User.findById(req.params.id);
 
+            if(!receiver.requests.includes(sender._id) && !receiver.friends.includes(sender._id)){
+                await receiver.updateOne({
+                    $pull: { requests: sender._id },
+                  });
+                await receiver.updateOne({
+                    $pull: { followers: sender._id },
+                });
+                await sender.updateOne({
+                    $pull: { following: sender._id },
+                });
+                  
+                res.json({ message: "You have successfully cancelled your request" });
+            } else {
+                return res.status(400).json({
+                    message: "Already Cancelled"
+                });
+            }
         } else {
             return res.status(400).json({
                 message: "You can't cancel a request to yourself"
             });
         }
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+exports.follow = async (req, res) => {
+    try{
+
     } catch(error){
         return res.status(500).json({
             message: error.message
