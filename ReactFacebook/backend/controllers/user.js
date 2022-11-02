@@ -452,6 +452,37 @@ exports.follow = async (req, res) => {
 
 exports.unfollow = async (req, res) => {
     try{
+        if (req.user.id !== req.params.id) {
+            const sender = await User.findById(req.user.id);
+            const receiver = await User.findById(req.params.id);
+            if (receiver.followers.includes(sender._id) && sender.following.includes(receiver._id)){
+                await receiver.updateOne({
+                    $pull: { followers: sender._id },
+                });
+                await sender.updateOne({
+                    $pull: { following: receiver._id },
+                });
+
+                res.json({ message: "Unfollow Success" });
+            } else {
+                return res.status(400).json({ 
+                    message: "Already not following" 
+                });
+            }
+        } else {
+            return res.status(400).json({ 
+                message: "You can't unfollow yourself" 
+            });
+        }
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
+
+exports.acceptRequest = async(req, res) => {
+    try{
 
     } catch(error){
         return res.status(500).json({
