@@ -33,3 +33,33 @@ exports.reactPost = async(req, res) => {
         });
     }
 };
+
+exports.getReacts = async(req, res) => {
+    try{
+        const reactsArray = await React.find({ postRef: req.params.id });
+        const newReacts = reactsArray.reduce((group, react) => {
+            let key = react["react"];
+            group[key] = group[key] || [];
+            group[key].push(react);
+            return group;
+        }, {});
+
+        const reacts = [
+            {
+                react: "like",
+                count: newReacts.like ? newReacts.like.length : 0
+            },
+            {
+                react: "love",
+                count: newReacts.love ? newReacts.love.length : 0
+            },
+            {
+                
+            }
+        ]
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
