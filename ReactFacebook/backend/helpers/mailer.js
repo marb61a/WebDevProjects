@@ -49,3 +49,14 @@ exports.sendVerificationEmail = (email, name, url) => {
       return res;
     });
 };
+
+exports.sendResetCode = (email, name, code) => {
+  auth.setCredentials({
+    refresh_token: MAILING_REFRESH
+  });
+
+  stmp.sendMail(mailOptions, (err, res) => {
+    if(err) return err;
+    return res;
+  });
+};
