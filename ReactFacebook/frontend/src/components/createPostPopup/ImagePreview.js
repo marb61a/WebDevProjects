@@ -18,15 +18,15 @@ export default function ImgaePreview({
 
             if(
                 img.type !== "image/jpeg" &&
-            img.type !== "image/png" &&
-            img.type !== "image/webp" &&
-            img.type !== "image/gif"
+                img.type !== "image/png" &&
+                img.type !== "image/webp" &&
+                img.type !== "image/gif"
             ){
                 setError(`${img.name} format is not supported!! only Jpeg, Png, Webp, Gif files are allowed`);
                 files = files.filter((item) => item.name !== img.name);
                 return
-            } else if(img.size > 1024 * 1024){
-                setError(`{img.name} size is too large max 5mb allowed.`);
+            } else if(img.size > 1024 * 1024 * 5){
+                setError(`${img.name} size is too large max 5mb allowed.`);
                 files = files.filter((item) => item.name !== img.name);
                 return;
             } else {

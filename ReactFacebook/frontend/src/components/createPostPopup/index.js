@@ -36,6 +36,11 @@ export default function CreatePostPopup({ user, setVisible }){
 
             setLoading(false);
             if(response === "ok"){
+                dispatch({
+                    type: profile ? "PROFILE_POSTS" : "POSTS_SUCCESS",
+                    payload: [response.data, ...posts]
+                });
+
                 setBackground("");
                 setText("");
                 setVisible(false);
@@ -47,7 +52,7 @@ export default function CreatePostPopup({ user, setVisible }){
             const postImages = images.map((img) => {
                 return dataURItoBlob(img);
             });
-            const path = `${user.username}/ post Images`;
+            const path = `${user.username}/ post_images`;
             let formData = new FormData();
             formData.append("path", path);
             postImages.forEach((image) => {
@@ -57,7 +62,12 @@ export default function CreatePostPopup({ user, setVisible }){
             const res = await createPost(null, null, text, response, user.id, user.token);
             setLoading(false);
 
-            if(res == "ok"){
+            if(res === "ok"){
+                dispatch({
+                    type: profile ? "PROFILE_POSTS" : "POSTS_SUCCESS",
+                    payload: [res.data, ...posts]
+                });
+
                 setText("");
                 setImages("");
                 setVisible(false);
@@ -66,12 +76,17 @@ export default function CreatePostPopup({ user, setVisible }){
             }
         } else if(text){
             setLoading(true);
-            const response = await createPost(null, null, text, response, user.id, user.token);
+            const response = await createPost(null, null, text, null, response, user.id, user.token);
             setLoading(false);
 
-            if(response == "ok"){
+            if(response.status === "ok"){
+                dispatch({
+                    type: profile ? "PROFILE_POSTS" : "POSTS_SUCCESS",
+                    payload: [response.data, ...posts]
+                });
+
+                setBackground("");
                 setText("");
-                setImages("");
                 setVisible(false);
             } else {
                 setError(response);
@@ -86,7 +101,7 @@ export default function CreatePostPopup({ user, setVisible }){
             <div className="postBox" ref={popup}>
                 {error && <PostError error={error} setError={setError} />}
                 <div className="box_header">
-                    <div className="small_circle" onClick={() => setVisible()}>
+                    <div className="small_circle" onClick={() => setVisible(false)}>
                         <i className="exit_icon"></i>
                     </div>
                     <span>Create Post</span>
