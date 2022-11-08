@@ -668,3 +668,27 @@ exports.removeFromSearch = async(req, res) => {
         });
     }
 };
+
+exports.getFriendsPageInfos = async(res, req) => {
+    try{
+        const user = await User.findById(req.user.id)
+            .select("friends requests")
+            .populate("friends", "first_name last_name picture username")
+            .populate("requests", "first_name last_name picture username");
+        
+        const sentRequests = await User.find({
+            requests: mongoose.Types.ObjectId(req.user.id)
+        })
+            .select("first_name last_name picture username");
+        
+        res.json({
+            friends: user.friends,
+            requests: user.requests,
+            sentRequests
+        });
+    } catch(error){
+        return res.status(500).json({
+            message: error.message
+        });
+    }
+};
