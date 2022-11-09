@@ -2,9 +2,18 @@ import { useEffect, useRef, useState } from "react";
 import { Return, Search } from "../../svg";
 
 import useClickOutside from "../../helpers/clickOutside";
+import {
+    addToSearchHistory,
+    getSearchHistory,
+    removeFromSearch,
+    search,
+} from "../../functions/user";
 
 export default function SearchMenu({ color, setShowSearchMenu }) {
     const [iconVisible, setIconVisible] = useState(true);
+    const [searchTerm, setSearchTerm] = useState("");
+    const [results, setResults] = useState([]);
+    const [searchHistory, setSearchHistory] = useState([]);
     const menu = useRef(null);
     const input = useRef(null);
 
@@ -14,6 +23,22 @@ export default function SearchMenu({ color, setShowSearchMenu }) {
     useEffect(() => {
         input.current.focus();
     });
+    const getHistory = async () => {
+        const res = await getSearchHistory(token);
+        setSearchHistory(res);
+    };
+    useEffect(() => {
+        input.current.focus();
+    }, []);
+
+    const searchHandler = async() => {
+        if(searchTerm === ""){
+            setResults("");
+        } else {
+            const res = await search(searchTerm, token);
+            getHistory();
+        }
+    };
     
     return(
         <div className="header_left search_area scrollbar" ref={menu}>

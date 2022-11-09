@@ -636,6 +636,9 @@ header{
     .all_menu {
         left: -12.5rem;
     }
+    .search_area {
+        width: 310px;
+    }
 }
 /*--- smaller responsive----------*/
 
@@ -645,4 +648,9 @@ header{
 
 .active_header svg{
     fill: var(--blue-color);
+}
+
+.active_link {
+    background: var(--light-blue-color);
+    color: var(--blue-color);
 }
