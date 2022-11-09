@@ -7,6 +7,7 @@ import "./style.css";
 import EditDetails from "./EditDetails";
 
 export default function Intro({ detailss, visitor, setOthername }) {
+    const { user } = useSelector((state) => ({ ...state }));
     const [details, setDetails] = useState();
     const [visible, setVisible] = useState(false);
     useEffect(() => {
@@ -33,7 +34,7 @@ export default function Intro({ detailss, visitor, setOthername }) {
         try{
             console.log("sent");
 
-            const { data } = await axios.put(`${process.enx.REACT_APP_BACKEND_URL}/updateDetails`, {}, { headers: {Authorization: `Bearer ${user.token}`}});
+            const { data } = await axios.put(`${process.env.REACT_APP_BACKEND_URL}/updateDetails`, {}, { headers: {Authorization: `Bearer ${user.token}`}});
             setShowBio(false);
             setDetails(data);
             setOthername(data.otherName);
