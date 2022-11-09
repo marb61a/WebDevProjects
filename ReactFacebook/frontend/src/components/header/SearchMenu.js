@@ -36,8 +36,16 @@ export default function SearchMenu({ color, setShowSearchMenu }) {
             setResults("");
         } else {
             const res = await search(searchTerm, token);
-            getHistory();
+            setResults(res);
         }
+    };
+    const addSearchToHandler = async(searchUser) => {
+        const res = await addToSearchHistory(searchUser, token);
+        getHistory();
+    };
+    const handleRemove = async (searchUser) => {
+        removeFromSearch(searchUser, token);
+        getHistory();
     };
     
     return(
@@ -67,12 +75,37 @@ export default function SearchMenu({ color, setShowSearchMenu }) {
                     />
                 </div>
             </div>
-            <div className="search_history_header">
-                <span>Recent searches</span>
-                <a>Edit</a>
+            {results == "" && (
+                <div className="search_history_header">
+                    <span>Recent searches</span>
+                    <a>Edit</a>
+                </div>
+            )}
+            <div className="search_results scrollbar">
+                {searchHistory && results == "" && searchHistory
+                    .sort((a, b) => {
+                        return new Date(b.createdAt) - new Date(a.createdAt);
+                    })
+                    .map((user) => {
+                        <div className="search_user_item hover1" key={user._id}>
+                            <Link
+                                className="flex"
+                                to={`/profile/${user.user.username}`}
+                                onClick={() => addToSearchHistoryHandler(user.user._id)}
+                            >
+                                <img src={user.user.picture} alt="" />
+                                <span>
+                                    {user.user.first_name} {user.user.last_name}
+                                </span>
+                            </Link>
+                            <i
+                                className="exit_icon"
+                                onClick={() => handleRemove(user.user._id)}
+                            ></i>
+                        </div>
+                    })
+                }
             </div>
-            <div className="search_history"></div>
-            <div className="search_results scrollbar"></div>
         </div>
     )
 }
