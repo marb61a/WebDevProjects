@@ -2,18 +2,22 @@ import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useRef, useState } from "react";
 
+import "./style.css";
 import { 
     ArrowDown,
     Friends,
+    FriendsActive,
     Gaming,
     HomeActive,
+    Home,
     Logo,
     Market,
     Menu,
     Messenger,
     Notifications,
     Search,
-    Watch
+    Watch,
+    FriendsActive
 } from "../../svg";
 import SearchMenu from "./SearchMenu";
 import AllMenu from "./AllMenu";

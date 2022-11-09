@@ -1,12 +1,24 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 
 import DisplayAccessibility from "./DisplayAccessibility";
 import HelpSupport from "./HelpSupport";
 import SettingsPrivacy from "./SettingsPrivacy";
 
 export default function UserMenu({ user }) {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
     const [visible, setVisible] = useState(0);
+
+    const logout = () => {
+        Cookies.set("user", "");
+        dispatch({
+            type: "LOGOUT",
+        });
+        navigate("/login");
+    };
 
     return(
         <div className="mmenu">

@@ -81,7 +81,7 @@ export default function SearchMenu({ color, setShowSearchMenu }) {
                     <a>Edit</a>
                 </div>
             )}
-            <div className="search_results scrollbar">
+            <div className="search_history scrollbar">
                 {searchHistory && results == "" && searchHistory
                     .sort((a, b) => {
                         return new Date(b.createdAt) - new Date(a.createdAt);
@@ -104,6 +104,23 @@ export default function SearchMenu({ color, setShowSearchMenu }) {
                             ></i>
                         </div>
                     })
+                }
+            </div>
+            <div className="search_results scrollbar">
+                {results && results
+                    .map((user) => (
+                        <Link
+                            to={`/profile/${user.username}`}
+                            className="search_user_item hover1"
+                            onClick={() => addToSearchHistoryHandler(user._id)}
+                            key={user._id}
+                        >
+                            <img src={user.picture} alt="" />
+                            <span>
+                                {user.first_name} {user.last_name}
+                            </span>
+                        </Link>
+                    ))
                 }
             </div>
         </div>
