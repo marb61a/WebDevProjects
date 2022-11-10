@@ -498,6 +498,60 @@
 }
 /*--End Menu Section-------*/
 
+/*-----Profile Card--------*/
+@media (max-width: 900px) {
+    .profile_w_left {
+        flex-direction: column;
+        align-items: center;
+    }
+    .profile_w_col {
+        transform: translateY(-3.6rem);
+    }
+    .profile_w_right {
+         transform: translateY(-3.6rem);
+    }
+    .profile_img_wrap {
+        flex-direction: column;
+        justify-content: center;
+    }
+    .profile_circle {
+        right: 1rem;
+    }
+    .profile_name {
+        padding-bottom: 10px;
+        flex-direction: column;
+    }
+    .pplumayknow {
+        display: none;
+    }
+    .profile_grid {
+        grid-template-columns: 1fr;
+    }
+    .profile_grid .createPost {
+        width: 100% !important;
+    }
+    .bottom_container {
+        padding: 5px;
+    }
+    .friendship {
+        transform: translateY(-4rem);
+    }
+    .othername {
+        transform: translateY(-10px);
+    }
+    .profile_friend_count {
+        text-align: center;
+        transform: translateY(-15px);
+    }
+    .profile_friend_imgs {
+        justify-content: center;
+        transform: translateY(-10px);
+    }
+    .fix1 {
+        transform: translate(1.2rem, -10px);
+    }
+}
+
 @media (max-width: 650px) {
     .profile_menu_wrap {
         display: none;
