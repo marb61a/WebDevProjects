@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { useMediaQuery } from "react-responsive";
+import { HashLoader } from "react-spinners";
+import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 
 import { profileReducer } from "../../functions/reducers";
 import Header from "../../components/header";
@@ -17,8 +19,11 @@ import Post from "../../components/post";
 import Photos from "./Photos";
 import Friends from "./Friends";
 import Intro from "../../components/intro";
+import "react-loading-skeleton/dist/skeleton.css";
+import CreatePostPopup from "../../components/createPostPopup";
 
-export default function Profile({ setVisible }){
+export default function Profile({ getAllPosts }){
+    const [visible, setVisible] = useState(false);
     const { username } = useParams();
     const navigate = useNavigate();
     const { user } = useSelector((state) => ({ ...state }));
@@ -97,7 +102,16 @@ export default function Profile({ setVisible }){
 
     return(
         <div className="profile">
-            <Header />
+            {visible && (
+                <CreatePostPopup 
+                    user={user}
+                    setVisible={setVisible}
+                    posts={profile?.posts}
+                    dispatch={dispatch}
+                    profile
+                />
+            )}
+            <Header page="profile" getAllPosts={getAllPosts}/>
             <div className="profile_top" ref={profileTop}>
                 <div className="profile_container">
                     <Cover 
