@@ -31,7 +31,20 @@ function App() {
             dispatch({
                 type: "POSTS_REQUEST"
             });
-            
+
+            const { data } = await axios.get(
+                `${process.env.REACT_APP_BACKEND_URL}/getAllposts`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`
+                    }
+                }
+            )
+
+            dispatch({
+                type: "POSTS_SUCCESS",
+                payload: data
+            });
         } catch(error){
             dispatch({
                 type: "POSTS_ERROR",
@@ -40,17 +53,27 @@ function App() {
         }
     }
 
-    return <div>
-        <Routes>
-            <Route element={<LoggedInRoutes />}>
-                <Route path="/profile" element={<Profile />} exact />
-                <Route path="/" element={<Home />} exact />
-            </Route>
-            <Route element={<NotLoggedInRoutes />}>
-                <Route path="/login" element={<Login />} exact />
-            </Route>
-        </Routes>
-    </div>;
+    return (
+        <div className={darkTheme && "dark"}>
+            {visible && (
+                <CreatePostPopup 
+                    user={user}
+                    setVisible={setVisible}
+                    posts={posts}
+                    dispatch={dispatch}
+                />
+            )}
+            <Routes>
+                <Route element={<LoggedInRoutes />}>
+                    <Route path="/profile" element={<Profile />} exact />
+                    <Route path="/" element={<Home />} exact />
+                </Route>
+                <Route element={<NotLoggedInRoutes />}>
+                    <Route path="/login" element={<Login />} exact />
+                </Route>
+            </Routes>
+        </div>
+    );
 }
   
 export default App;
