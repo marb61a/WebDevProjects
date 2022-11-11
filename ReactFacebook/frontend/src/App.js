@@ -65,12 +65,52 @@ function App() {
             )}
             <Routes>
                 <Route element={<LoggedInRoutes />}>
-                    <Route path="/profile" element={<Profile />} exact />
-                    <Route path="/" element={<Home />} exact />
+                    <Route
+                        path="/profile"
+                        element={
+                            <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+                        }
+                        exact
+                    />
+                    <Route
+                        path="/profile/:username"
+                        element={
+                            <Profile setVisible={setVisible} getAllPosts={getAllPosts} />
+                        }
+                        exact
+                    />
+                    <Route
+                        path="/friends"
+                        element={
+                            <Friends setVisible={setVisible} getAllPosts={getAllPosts} />
+                        }
+                        exact
+                    />
+                    <Route
+                        path="/friends/:type"
+                        element={
+                            <Friends setVisible={setVisible} getAllPosts={getAllPosts} />
+                        }
+                        exact
+                    />
+                    <Route
+                        path="/"
+                        element={
+                            <Home
+                                setVisible={setVisible}
+                                posts={posts}
+                                loading={loading}
+                                getAllPosts={getAllPosts}
+                            />
+                        }
+                        exact
+                    />
+                    <Route path="/activate/:token" element={<Activate />} exact />
                 </Route>
                 <Route element={<NotLoggedInRoutes />}>
                     <Route path="/login" element={<Login />} exact />
                 </Route>
+                <Route path="/reset" element={<Reset />} />
             </Routes>
         </div>
     );
