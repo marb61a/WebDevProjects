@@ -120,9 +120,42 @@ export default function Friendship({ friendShip, profileid}){
                     </button>
                 )
             )}
-            {frienship?.requestSent ? (
-                
+            {friendship?.requestSent ? (
+                <button className="blue_btn" onClick={() => cancelRequestHandler()}>
+                    <img
+                        src="../../../icons/cancelRequest.png" 
+                        className="invert"
+                        alt=""
+                    />
+                    <span>Cancel Request</span>
+                </button>
+            ) : (
+                friendship?.requestReceived && (
+                    <div className="friends_menu_wrap">
+                        <button className="gray_btn" onClick={() => setRespondMenu(true)}>
+                            <img src="../../../icons/friends.png" alt="" />
+                            <span>Respond</span>
+                        </button>
+                        {respondMenu && (
+                            <div className="open_cover_menu" ref={menu1}>
+                                <div
+                                    className="open_cover_menu_item hover1"
+                                    onClick={() => acceptRequestHanlder()}
+                                >
+                                    Confirm
+                                </div>
+                                <div
+                                    className="open_cover_menu_item hover1"
+                                    onClick={() => deleteRequestHanlder()}
+                                >
+                                    Delete
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                )
             )}
+            
         </div>
     );
 }
