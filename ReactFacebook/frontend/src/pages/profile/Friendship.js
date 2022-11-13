@@ -75,8 +75,22 @@ export default function Friendship({ friendShip, profileid}){
                     <button className="gray_btn">
                         <span>Friends</span>
                     </button>
+                    {friendsMenu && (
+                        <div className="open_cover_menu" ref={menu}>
+                            <div className="open_cover_menu_item hover1">
+                                <img src="../../../icons/favoritesOutline.png" alt="" />
+                                Favorites
+                            </div>
+                            
+                        </div>
+                    )}
                 </div>
             ) : (
+                !friendship?.requestSent && !friendship?.requestReceived && (
+                    <button>
+
+                    </button>
+                )
             )}
         </div>
     );

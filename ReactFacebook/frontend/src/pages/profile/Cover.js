@@ -62,7 +62,8 @@ export default function Cover({ cover, visitor, photos }){
             } catch(error) {
                 console.log(error);
             }
-        }
+        },
+        [croppedAreaPixels]
     );
 
     const coverRef = useRef(null);
@@ -93,10 +94,11 @@ export default function Cover({ cover, visitor, photos }){
                     cRef.current.src = res[0].url;
                 } else {
                     setLoading(false);
-                    setError(updated_picture);
+                    setError(new_post);
                 }
             } else {
                 setLoading(false);
+                setError(updated_picture);
             }
         } catch (error) {
             setLoading(false);
@@ -168,7 +170,7 @@ export default function Cover({ cover, visitor, photos }){
                                 Select Photo
                             </div>
                             <div className="open_cover_menu_item hover1" onClick={() => refInput.current.click()}>
-                                <i className="upload_icon">Upload Photo</i>
+                                <i className="upload_icon"></i>Upload Photo
                             </div>
                         </div>
                     )}
