@@ -81,16 +81,47 @@ export default function Friendship({ friendShip, profileid}){
                                 <img src="../../../icons/favoritesOutline.png" alt="" />
                                 Favorites
                             </div>
-                            
+                            <div className="open_cover_menu_item hover1">
+                                <img src="../../../icons/editFriends.png" alt="" />
+                                Edit Friend list
+                            </div>
+                            {friendShip?.following? (
+                                <div
+                                    className="open_cover_menu_item hover1"
+                                    onClick={() => unfollowHandler()}
+                                >
+                                    <img src="../../../icons/unfollowOutlined.png" alt="" />
+                                    Unfollow
+                                </div>
+                            ) : (
+                                <div
+                                    className="open_cover_menu_item hover1"
+                                    onClick={() => followHandler()}
+                                >
+                                    <img src="../../../icons/unfollowOutlined.png" alt="" />
+                                    Follow
+                                </div>
+                            )}
+                            <div
+                                className="open_cover_menu_item hover1"
+                                onClick={() => unfriendHandler()}
+                            >
+                                <i className="unfriend_outlined_icon"></i>
+                                Unfriend
+                            </div>
                         </div>
                     )}
                 </div>
             ) : (
                 !friendship?.requestSent && !friendship?.requestReceived && (
-                    <button>
-
+                    <button className="blue_btn" onClick={() => addFriendHandler()}>
+                        <img src="../../../icons/addFriend.png" alt="" className="invert"/>
+                        <span>Add Friend</span>
                     </button>
                 )
+            )}
+            {frienship?.requestSent ? (
+                
             )}
         </div>
     );
