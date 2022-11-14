@@ -114,17 +114,25 @@ export default function Profile({ getAllPosts }){
             <Header page="profile" getAllPosts={getAllPosts}/>
             <div className="profile_top" ref={profileTop}>
                 <div className="profile_container">
-                    <Cover 
-                        cover={profile.cover}
-                        visitor={visitor}
-                        photos={photos.resources}
-                    />
-                    <ProfilePictureInfos 
-                        profile={profile}
-                        visitor={visitor}
-                        photos={photos.resources}
-                        othername={othername}
-                    />
+                    {loading ? (
+                        <>
+                        
+                        </>
+                    ) : (
+                        <>
+                            <Cover 
+                                cover={profile.cover}
+                                visitor={visitor}
+                                photos={photos.resources}
+                            />
+                            <ProfilePictureInfos 
+                                profile={profile}
+                                visitor={visitor}
+                                photos={photos.resources}
+                                othername={othername}
+                            />
+                        </>
+                    )}
                     <ProfileMenu />
                 </div>
             </div>
