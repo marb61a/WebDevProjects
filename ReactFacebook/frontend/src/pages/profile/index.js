@@ -116,7 +116,45 @@ export default function Profile({ getAllPosts }){
                 <div className="profile_container">
                     {loading ? (
                         <>
-                        
+                            <div className="profile_cover">
+                                <Skeleton 
+                                    height="347px"
+                                    containerClassName="avatar-skeleton"
+                                    style={{ borderRadius: "8px" }}
+                                />
+                            </div>
+                            <div
+                                className="profile_img_wrap"
+                                style={{
+                                    marginBottom: "-3rem",
+                                    transform: "translateY(-8px"
+                                }}
+                            >
+                                <div className="profile_w_left">
+                                    <Skeleton 
+                                        circle
+                                        height="180px"
+                                        width="180px"
+                                        containerClassName="avatar-skeleton"
+                                        style={{ transform: "translateY(-3.3rem)" }}
+                                    />
+                                    <div className="profile_w_col">
+                                        <div className="profile_name">
+                                        <Skeleton
+                                            height="35px"
+                                            width="200px"
+                                            containerClassName="avatar-skeleton"
+                                        />
+                                        <Skeleton
+                                            height="30px"
+                                            width="100px"
+                                            containerClassName="avatar-skeleton"
+                                            style={{ transform: "translateY(2.5px)" }}
+                                        />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </>
                     ) : (
                         <>
