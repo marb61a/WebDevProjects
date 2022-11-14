@@ -236,25 +236,43 @@ export default function Profile({ getAllPosts }){
                                             </div>
                                         </div>
                                         <div className="profile_card">
-
+                                            <div className="profile_card_header">
+                                                Photos
+                                                <div className="profile_header_link">
+                                                    See all photos
+                                                </div>
+                                            </div>
+                                            <div className="sekelton_loader">
+                                                <HashLoader color="#1876f2" />
+                                            </div>
+                                        </div>
+                                        <div className="profile_card">
+                                            <div className="profile_card_header">
+                                                    Friends
+                                                <div className="profile_header_link">
+                                                    See all friends
+                                                </div>
+                                            </div>
+                                            <div className="sekelton_loader">
+                                                <HashLoader color="#1876f2" />
+                                            </div>
                                         </div>
                                     </>
                                 ) : (
                                     <>
-                                    
+                                        <Intro 
+                                            detailss={profile.details}
+                                            visitor={visitor}
+                                            setOthername={setOthername}
+                                        />
+                                        <Photos 
+                                            username={userName}
+                                            visitor={visitor}
+                                            setOthername={setOthername}
+                                        />
+                                        <Friends friends={profile.friends}/>    
                                     </>
                                 )}
-                                <Intro 
-                                    detailss={profile.details}
-                                    visitor={visitor}
-                                    setOthername={setOthername}
-                                />
-                                <Photos 
-                                    username={userName}
-                                    visitor={visitor}
-                                    setOthername={setOthername}
-                                />
-                                <Friends friends={profile.friends}/>
                                 <div className="relative_fb_copyright">
                                     <Link to="/">Privacy </Link>
                                     <span>. </span>
@@ -277,15 +295,21 @@ export default function Profile({ getAllPosts }){
                                     <CreatePost user={user} profile setVisible={setVisible}/>
                                 )}
                                 <GridPosts />
-                                <div className="posts">
-                                    {profile.posts && profile.posts.length ? (
-                                        profile.posts.map((post) => (
-                                            <Post post={post} user={user} key={post._id} profile />
-                                        ))
-                                    ) : (
-                                        <div className="no_posts">No posts available</div>
-                                    )}
-                                </div>
+                                {loading ? (
+                                    <div className="sekelton_loader">
+                                        <HashLoader color="#1876f2" />
+                                    </div>
+                                ) : (
+                                    <div className="posts">
+                                        {profile.posts && profile.posts.length ? (
+                                            profile.posts.map((post) => (
+                                                <Post post={post} user={user} key={post._id} profile />
+                                            ))
+                                        ) : (
+                                            <div className="no_posts">No posts available</div>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         </div>
                     </div>
