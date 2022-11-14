@@ -181,6 +181,20 @@ export default function Profile({ getAllPosts }){
                                         width={120}
                                         containerClassName="avatar-skeleton"
                                     />
+                                    <div className="flex">
+                                        <Skeleton
+                                            height="36px"
+                                            width={120}
+                                            containerClassName="avatar-skeleton"
+                                        />
+                                        {visitor && (
+                                            <Skeleton 
+                                                height="36px"
+                                                width={120}
+                                                containerClassName="avatar-skeleton"
+                                            />
+                                        )}
+                                    </div>
                                 </div>
                             </div>
                         </>
@@ -213,6 +227,23 @@ export default function Profile({ getAllPosts }){
                             }`}
                         >
                             <div className="profile_left" ref={leftSide}>
+                                {loading ? (
+                                    <>
+                                        <div className="profile_card">
+                                            <div className="profile_card_header">Intro</div>
+                                            <div className="sekelton_loader">
+                                                <HashLoader color="#1876f2" />
+                                            </div>
+                                        </div>
+                                        <div className="profile_card">
+
+                                        </div>
+                                    </>
+                                ) : (
+                                    <>
+                                    
+                                    </>
+                                )}
                                 <Intro 
                                     detailss={profile.details}
                                     visitor={visitor}
