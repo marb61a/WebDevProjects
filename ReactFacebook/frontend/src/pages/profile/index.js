@@ -140,19 +140,47 @@ export default function Profile({ getAllPosts }){
                                     />
                                     <div className="profile_w_col">
                                         <div className="profile_name">
-                                        <Skeleton
-                                            height="35px"
-                                            width="200px"
-                                            containerClassName="avatar-skeleton"
-                                        />
-                                        <Skeleton
-                                            height="30px"
-                                            width="100px"
-                                            containerClassName="avatar-skeleton"
-                                            style={{ transform: "translateY(2.5px)" }}
-                                        />
+                                            <Skeleton
+                                                height="35px"
+                                                width="200px"
+                                                containerClassName="avatar-skeleton"
+                                            />
+                                            <Skeleton
+                                                height="30px"
+                                                width="100px"
+                                                containerClassName="avatar-skeleton"
+                                                style={{ transform: "translateY(2.5px)" }}
+                                            />
+                                        </div>
+                                        <div className="profile_friend_count">
+                                            <Skeleton 
+                                                height="20px"
+                                                width="90px"
+                                                containerClassName="avatar-skeleton"
+                                                style={{ marginTop: "5px" }}
+                                            />
+                                        </div>
+                                        <div className="profile_friend_imgs">
+                                            {Array.from(new Array(6), (val, i) => i + 1).map(
+                                                (id, i) => (
+                                                    <Skeleton 
+                                                        circle
+                                                        height="32px"
+                                                        width="32px"
+                                                        containerClassName="avatar-skeleton"
+                                                        style={{ transform: `translateX(${-i * 7}px)` }}
+                                                    />
+                                                )
+                                            )}
                                         </div>
                                     </div>
+                                </div>
+                                <div className={`friendship ${!visitor && "fix"}`}>
+                                    <Skeleton 
+                                        height="36px"
+                                        width={120}
+                                        containerClassName="avatar-skeleton"
+                                    />
                                 </div>
                             </div>
                         </>
