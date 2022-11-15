@@ -38,6 +38,12 @@ export default function Activate(){
             );
             setSuccess(data.message);
 
+            Cookies.set("user", JSON.stringify({...user, verified: true}));
+            dispatch({
+                typr: "VERIFY",
+                payload: true
+            });
+
             setTimeout(() => {
                 navigate("/");
             }, 3000);
@@ -59,6 +65,21 @@ export default function Activate(){
                     loading={loading}
                 />
             )}
+            {error && (
+                <ActivateForm 
+                    type="error"
+                    header="Account verification failed."
+                    text={error}
+                    loading={loading}
+                />
+            )}
+            <Header />
+            <LeftHome user={user}/>
+            <div className="home_middle">
+                <Stories />
+                <CreatePost user={user} />
+            </div>
+            <RightHome user={user} />
         </div>
     );
 }
