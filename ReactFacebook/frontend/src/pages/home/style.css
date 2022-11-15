@@ -65,3 +65,47 @@
         width: 100%;
     }    
 }
+
+@media (max-width: 960px) {
+    .createPost,
+    .post,
+    .send_verification {
+        width: 93%;
+    }
+    .stories {
+        width: 95%;
+    }
+    .home_middle {
+        margin-left: 10%;
+    }
+    .right_home {
+        left: 78%;
+        width: 20vw;
+    }
+    .splitter1 {
+        width: 20vw;
+    }
+    .contact_circle {
+        width: 30px;
+    }
+    .contacts_header_right {
+        right: 0;
+    }
+}
+
+@media (max-width: 885px) {
+    .right_home {
+        display: none;
+    }
+    .createPost,
+    .post,
+    .send_verification {
+        width: 110%;
+    }
+    .stories {
+        width: 112%;
+    }
+    .home_middle {
+        margin-left: 9%;
+    }
+}
