@@ -18,6 +18,37 @@ export default function Activate(){
     const { user } = useSelector((user) => ({ ...user }));
     const [success, setSuccess] = useState("");
 
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(true);
+    const { token } = useParams();
+    useEffect(() => {
+        activateAccount();
+    }, []);
+    const activateAccount = async() => {
+        try{
+            setLoading(true);
+            const { data } = await axios.post(
+                `${process.env.REACT_APP_BACKEND_URL}/activate`,
+                { token },
+                {
+                    headers: {
+                        Authorization: `Bearer ${user.token}`
+                    }
+                }
+            );
+            setSuccess(data.message);
+
+            setTimeout(() => {
+                navigate("/");
+            }, 3000);
+        } catch(error){
+            setError(error.response.data.message);
+            setTimeout(() => {
+                navigate("/");
+            }, 3000);
+        }
+    }
+
     return(
         <div className="home">
             {success && (
