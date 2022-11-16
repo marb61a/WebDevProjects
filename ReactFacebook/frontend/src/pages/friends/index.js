@@ -58,6 +58,43 @@ export default function Friends(){
                                 <i className="right_icon"></i>
                             </div>
                         </Link>
+                        <Link
+                            to="/friends/requests"
+                            className={`mmenu_item hover3 ${
+                                type === "requests" && "active_friends"
+                            }`}
+                        >
+                            <div className="small_circle">
+                                <i className="friends_requests_icons"></i>
+                            </div>
+                            <span>Friend Requests</span>
+                            <div className="rArrow">
+                                <i className="right_icon"></i>
+                            </div>
+                        </Link>
+                        <Link
+                            to="/friends/sent"
+                            className={`mmenu_item hover3 ${
+                                type === "sent" && "active_friends"
+                            }`}
+                        >
+                            <div className="small_circle">
+                                <i className="friends_requests_icons"></i>
+                            </div>
+                            <span>Sent Requests</span>
+                            <div className="rArrow">
+                                <i className="right_icon"></i>
+                            </div>
+                        </Link>
+                        <div className="mmenu_item hover3">
+                            <div className="small_circle">
+                                <i className="friends_suggestions_icon"></i>
+                            </div>
+                            <span>Suggestions</span>
+                            <div className="rArrow">
+                                <i className="right_icon"></i>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
