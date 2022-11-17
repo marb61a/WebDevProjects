@@ -154,9 +154,56 @@ export default function Friends(){
                             </div>
                         </div>
                     )}
-                    
+                    {(type === undefined || type === "sent") && (
+                        <div className="friends_right_wrap">
+                            <div className="friends_left_header">
+                                <h3>Sent Requests</h3>
+                                {type === undefined && (
+                                    <Link to="/friends/sent" className="see_link hover3">
+                                        See All
+                                    </Link>
+                                )}
+                            </div>
+                            <div className="flex_wrap">
+                                {data.sentRequests && data.sentRequests
+                                    .map((user) => (
+                                        <Card 
+                                            user={user}
+                                            key={user._id}
+                                            type="sent"
+                                            getData={getData}
+                                        />
+                                    )
+                                )}
+                            </div>
+                        </div>
+                    )}
+                    {(type === undefined || type === "all") && (
+                        <div className="friends_right_wrap">
+                            <div className="friends_left_header">
+                                <h3>Friends</h3>
+                                {type === undefined && (
+                                <Link to="/friends/all" className="see_link hover3">
+                                    See all
+                                </Link>
+                                )}
+                            </div>
+                            <div className="flex_wrap">
+                                {data.friends && data.friends
+                                    .map((user) => (
+                                        <Card
+                                            user={user}
+                                            key={user._id}
+                                            type="friends"
+                                            getData={getData}
+                                        />
+                                    )
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
             </div>
         </>
-    )
+    );
 }
