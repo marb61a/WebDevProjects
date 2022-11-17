@@ -129,7 +129,33 @@ export default function Friends(){
                         </div>
                     </div>
                 </div>
-                
+                <div className="friends_right">
+                    {(type === undefined || type === "requests") && (
+                        <div className="friends_right_wrap">
+                            <div className="friends_left_header">
+                                <h3>Friend Requests</h3>
+                                {type === undefined && (
+                                    <Link to="/friends/requests" className="see_link hover3">
+                                        See All
+                                    </Link>
+                                )}
+                            </div>
+                            <div className="flex_wrap">
+                                {data.requests && data.requests
+                                    .map((user) => (
+                                        <Card 
+                                            user={user}
+                                            key={user._id}
+                                            type="request"
+                                            getData={getData}
+                                        />
+                                    )
+                                )}
+                            </div>
+                        </div>
+                    )}
+                    
+                </div>
             </div>
         </>
     )
