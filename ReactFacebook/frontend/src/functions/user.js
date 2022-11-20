@@ -166,3 +166,38 @@ export const getSearchHistory = async(token) => {
         return error.response.data.message;
     }
 };
+
+export const removeFromSearch = async(searchUser, token) => {
+    try{
+        const { data } = await axios.put(
+            `${process.env.REACT_APP_BACKEND_URL}/removeFromSearch`,
+            { searchUser },
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        return data;
+    } catch (error) {
+        return error.response.data.message;
+    }
+};
+
+export const getFriendsPageInfos = async(token) => {
+    try{
+        const { data } = await axios.put(
+            `${process.env.REACT_APP_BACKEND_URL}/getFriendsPageInfos`,
+            {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                }
+            }
+        );
+
+        return data;
+    } catch (error) {
+        return error.response.data.message;
+    }
+};
