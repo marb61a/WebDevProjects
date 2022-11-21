@@ -193,12 +193,29 @@ export default function Post({ post, user, profile }){
                         setCount={setCount}
                     />
                 </div>
+                {comments && comments.sort((a, b) => {
+                    return new Date(b.commentAt) - new Date(a.commentAt);
+                    })
+                    .slice(0, count)
+                    .map((comment, i) => <Comment comment={comment} key={i}/>)
+                }
+                {count < comments.length && (
+                    <div className="view_comments" onClick={() => showMore()}>
+                        View more comments
+                    </div>
+                )}
                 {showMenu && (
                     <PostMenu
                         userId={user.id}
                         postUserId={post.user._id}
                         imagesLength={post?.images?.length}
                         setShowMenu={setShowMenu}
+                        postId={post._id}
+                        token={user.token}
+                        checkSaved={checkSaved}
+                        setCheckSaved={setCheckSaved}
+                        images={post.images}
+                        postRef={postRef}
                     />
                 )}
         </div>
