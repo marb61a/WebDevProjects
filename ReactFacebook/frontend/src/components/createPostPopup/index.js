@@ -52,7 +52,7 @@ export default function CreatePostPopup({ user, setVisible }){
             const postImages = images.map((img) => {
                 return dataURItoBlob(img);
             });
-            const path = `${user.username}/ post_images`;
+            const path = `${user.username}/post_images`;
             let formData = new FormData();
             formData.append("path", path);
             postImages.forEach((image) => {
@@ -62,7 +62,7 @@ export default function CreatePostPopup({ user, setVisible }){
             const res = await createPost(null, null, text, response, user.id, user.token);
             setLoading(false);
 
-            if(res === "ok"){
+            if(res.status === "ok"){
                 dispatch({
                     type: profile ? "PROFILE_POSTS" : "POSTS_SUCCESS",
                     payload: [res.data, ...posts]

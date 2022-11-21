@@ -107,7 +107,19 @@ export default function CreateComment({ user }){
                         value={text}
                         placeholder="Write a comment..."
                         onChange={(e) => setText(e.target.value)}
+                        onKeyUp={handleComment}
                     />
+                    <div className="comment_circle" style={{ marginTop: "5px" }}>
+                        <ClipLoader size={20} color="#1876f2" loading={loading} />
+                    </div>
+                    <div
+                        className="comment_circle_icon hover2"
+                        onClick={() => {
+                            setPicker((prev) => !prev);
+                        }}
+                    >
+                        <i className="emoji_icon"></i>
+                    </div>
                     <div className="comment_circle_icon hover2" onClick={() => imgInput.current.click()}>
                         <i className="camera_icon"></i>
                     </div>
