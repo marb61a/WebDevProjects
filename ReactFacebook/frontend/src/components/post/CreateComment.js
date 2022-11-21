@@ -42,6 +42,40 @@ export default function CreateComment({ user }){
         };
     }
 
+    const handleComment = async(e) => {
+        if(e.key === "Enter"){
+            if (commentImage != ""){
+                setLoading(true);
+                const img = dataURItoBlob(commentImage);
+                const path = `${user.username}/post_images/${postId}`;
+                let formData = new FormData();
+                formData.append("path", path);
+                formData.append("file", img);
+                const imgComment = await uploadImages(formData, path, user.token);
+
+                const comments = await comment(
+                    postId,
+                    text,
+                    imgComment[0].url,
+                    user.token
+                );
+                setComments(comments);
+                setCount((prev) => ++prev);
+                setLoading(false);
+                setText("");
+                setCommentImage("");
+            } else {
+                setLoading(true);
+                const comments = await comment(postId, text, "", user.token);
+                setComments(comments);
+                setCount((prev) => ++prev);
+                setLoading(false);
+                setText("");
+                setCommentImage("");
+            }
+        }
+    };
+
     return(
         <div className="create_comment_wrap">
             <div className="create_comment">
