@@ -1,17 +1,44 @@
 import { Link } from "react-router-dom";
 import Moment from "react-moment";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import "./style.css";
 import{ Dots, Public} from "../../svg";
 import CreateComment from "./CreateComment";
 import PostMenu from "./PostMenu";
 import ReactsPopup from "./ReactsPopup";
-import { postsReducer } from "../../functions/reducers";
+import { comment, getReacts, reactPost } from "../../functions/post";
+import Comment from "./Comment";
 
 export default function Post({ post, user, profile }){
     const [visible, setVisible] = useState(false);
     const [showMenu, setShowMenu] = useState(false);
+    const [reacts, setReacts] = useState();
+    const [check, setCheck] = useState();
+    const [total, setTotal] = useState(0);
+    const [count, setCount] = useState(1);
+    const [checkSaved, setCheckSaved] = useState();
+    const [comments, setComments] = useState([]);
+
+    useEffect(() => {
+        getPostReacts();
+    }, [post]);
+    useEffect(() => {
+        setComments(post?.comments);
+    }, [post]);
+
+    const getPostReacts = async() => {
+        const res = await getReacts(post._id, user.token);
+        setReacts(res.reacts);
+        setCheck(res.check);
+        setTotal(res.total);
+        setCheckSaved(res.checkSaved);
+    };
+
+    const showMore = () => {
+        setCount((prev) => prev + 3);
+    };
+    const postRef = useRef(null);
 
     return(
         <div className="post">
